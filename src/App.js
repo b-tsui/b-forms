@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import history from "./utils/history";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <NavBar />
         </header>
         <Switch>
-          <Route path="/" exact />
+          <Route path="/" exact component={HomePage} />
           <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </Router>
