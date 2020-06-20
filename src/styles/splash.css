@@ -1,0 +1,8 @@
+.splash-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.splash-title {
+  align-self: center;
+}

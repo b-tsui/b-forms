@@ -1,41 +1,70 @@
 import React from "react";
 import { Parallax, Background } from "react-parallax";
+import "../styles/splash.css";
 
-const Splash = () => (
-  <div>
-    {/* -----basic config-----*/}
-    <Parallax
-      blur={10}
-      bgImage={require("../images/splash1.jpeg")}
-      bgImageAlt="the cat"
-      strength={200}
-    >
-      Put some text content here - even an empty div with fixed dimensions to
-      have a height for the parallax.
-      <div style={{ height: "200px" }} />
-    </Parallax>
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
-    {/* -----dynamic blur-----*/}
-    <Parallax
-      blur={{ min: -15, max: 15 }}
-      bgImage={require("../images/splash1.jpeg")}
-      bgImageAlt="the dog"
-      strength={-200}
-    >
-      Blur transition from min to max
-      <div style={{ height: "200px" }} />
-    </Parallax>
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(1),
+      width: theme.spacing(16),
+      height: theme.spacing(16),
+    },
+  },
+}));
 
-    {/* -----custom background element-----*/}
-    <Parallax strength={300}>
+const Splash = () => {
+  const classes = useStyles();
+
+  return (
+    <div>
+      {/* -----basic config-----*/}
+      <Parallax
+        blur={5}
+        bgImage={require("../images/splash1.jpeg")}
+        bgImageAlt="the cat"
+        strength={800}
+      >
+        <div
+          style={{ height: "calc(100vh - 64px)" }}
+          className="splash-title-container"
+        >
+          <h2 className="splash-title">Create 🅱️etter Forms</h2>
+        </div>
+      </Parallax>
+      <div className={classes.root}>
+        <Paper elevation={0} />
+        <Paper />
+        <Paper elevation={3} />
+      </div>
+      {/* -----dynamic blur-----*/}
+      {/* <Background className="custom-bg">
+      <img src="http://www.fillmurray.com/500/320" alt="fill murray" />
+    </Background> */}
+      <Parallax
+        blur={{ min: -15, max: 15 }}
+        bgImage={require("../images/splash1.jpeg")}
+        bgImageAlt="the dog"
+        strength={-200}
+      >
+        Blur transition from min to max
+        <div style={{ height: "calc(100vh - 64px)" }} />
+      </Parallax>
+
+      {/* -----custom background element-----*/}
+      {/* <Parallax strength={300}>
       <div>Use the background component for custom elements</div>
       <Background className="custom-bg">
         <img src="http://www.fillmurray.com/500/320" alt="fill murray" />
       </Background>
-    </Parallax>
+    </Parallax> */}
 
-    {/* -----renderProp: "renderLayer"-----*/}
-    <Parallax
+      {/* -----renderProp: "renderLayer"-----*/}
+      {/* <Parallax
       bgImage={require("../images/splash1.jpeg")}
       strength={400}
       renderLayer={(percentage) => (
@@ -52,7 +81,8 @@ const Splash = () => (
       )}
     >
       <p>... Content</p>
-    </Parallax>
-  </div>
-);
+    </Parallax> */}
+    </div>
+  );
+};
 export default Splash;
