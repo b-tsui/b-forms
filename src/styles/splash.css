@@ -3,6 +3,12 @@
   justify-content: center;
   align-items: center;
 }
-.splash-title {
-  align-self: center;
+div.splash-title {
+  font-family: "open sans", arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.9);
 }

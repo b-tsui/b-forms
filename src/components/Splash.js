@@ -33,7 +33,16 @@ const Splash = () => {
           style={{ height: "calc(100vh - 64px)" }}
           className="splash-title-container"
         >
-          <h2 className="splash-title">Create 🅱️etter Forms</h2>
+          <Paper elevation={3} className="splash-title">
+            <h2 className="splash-title-text">Create 🅱️etter Forms</h2>
+            <div>
+              Get started creating better forms by signing up or login in!
+            </div>
+            <div>
+              To demo, login with the email: demo@demo.com and password:
+              aA1!demo
+            </div>
+          </Paper>
         </div>
       </Parallax>
       <div className={classes.root}>
