@@ -1,4 +1,5 @@
 {
   "domain": "b-form.us.auth0.com",
-  "clientId": "rBx4TYR81KT5SGBJU4wy8xa0d37zltxH"
+  "clientId": "rBx4TYR81KT5SGBJU4wy8xa0d37zltxH",
+  "audience": "bform-api"
 }

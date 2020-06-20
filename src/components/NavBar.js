@@ -28,6 +28,13 @@ const NavBar = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            <div>
+              <a href="/" id="navbar-logo">
+                b-forms
+              </a>
+            </div>
+          </Typography>
           <div>
             {!isAuthenticated && (
               <button onClick={() => loginWithRedirect({})}>Log in</button>
