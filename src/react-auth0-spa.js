@@ -53,10 +53,10 @@ export const Auth0Provider = ({
         const token = await auth0FromHook.getTokenSilently();
         localStorage.setItem("token", token);
         //create user in graphql backend
-        await addUser({
+        let res = await addUser({
           variables: { input: { name: user.nickname, email: user.email } },
         });
-        setUser(user);
+        setUser({ ...user, userId: res.data.addUser.id });
       }
 
       setLoading(false);
