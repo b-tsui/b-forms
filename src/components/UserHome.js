@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 import { useAuth0 } from "../react-auth0-spa";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
+import SingleForm from "./SingleForm";
 
 const GET_USER_FORMS = gql`
   query UserForms($userId: ID!) {
@@ -32,7 +33,12 @@ const UserHome = ({ user }) => {
             My Forms
           </Typography>
         </div>
-        <div className="sets-container">forms here</div>
+        <div className="sets-container">
+          forms here
+          {data.userForms.map((form) => (
+            <SingleForm form={form} />
+          ))}
+        </div>
       </>
     )
   );
