@@ -8,6 +8,7 @@ import { Typography } from "@material-ui/core";
 import Splash from "./Splash";
 import Loading from "./Loading";
 import UserHome from "./UserHome";
+import "../styles/home-page.css";
 
 const HomePage = () => {
   const { user, loading } = useAuth0();

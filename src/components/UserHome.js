@@ -5,6 +5,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
 import SingleForm from "./SingleForm";
+import CreateForm from "./CreateForm";
 
 const GET_USER_FORMS = gql`
   query UserForms($userId: ID!) {
@@ -35,6 +36,7 @@ const UserHome = ({ user }) => {
         </div>
         <div className="sets-container">
           forms here
+          <CreateForm />
           {data.userForms.map((form) => (
             <SingleForm form={form} />
           ))}
