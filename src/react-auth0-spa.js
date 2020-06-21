@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import createAuth0Client from "@auth0/auth0-spa-js";
-import gql from "graphql-tag";
-import { useMutation } from "@apollo/react-hooks";
+import { api } from "./config";
 
-const ADD_USER = gql`
+const ADD_USER = `
   mutation AddUser($input: AddUserInput!) {
     addUser(input: $input) {
       id
@@ -29,8 +28,6 @@ export const Auth0Provider = ({
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
 
-  const [addUser, { data }] = useMutation(ADD_USER);
-
   useEffect(() => {
     const initAuth0 = async () => {
       const auth0FromHook = await createAuth0Client(initOptions);
@@ -51,13 +48,22 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         const token = await auth0FromHook.getTokenSilently();
-        localStorage.setItem("token", token);
         //create user in graphql backend
-        let res = await addUser({
-          variables: { input: { name: user.nickname, email: user.email } },
+        // let res = await addUser({
+        //   variables: { input: { name: user.nickname, email: user.email } },
+        // });
+        const variables = { input: { name: user.nickname, email: user.email } };
+        let res = await fetch(`${api}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: ADD_USER, variables }),
         });
+        const { data } = await res.json();
         //localStorage.setItem("userId", res.data.addUser.id);
-        setUser({ ...user, userId: res.data.addUser.id });
+        setUser({ ...user, userId: data.addUser.id });
       }
 
       setLoading(false);

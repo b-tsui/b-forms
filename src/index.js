@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import ApolloWrapper from "./ApolloWrapper";
 import { Auth0Provider } from "./react-auth0-spa";
 import config from "./auth_config.json";
 import history from "./utils/history";
-import client from "./client";
-import { ApolloProvider } from "@apollo/react-hooks";
+
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = (appState) => {
@@ -18,17 +18,17 @@ const onRedirectCallback = (appState) => {
 };
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Auth0Provider
-      domain={config.domain}
-      client_id={config.clientId}
-      redirect_uri={window.location.origin}
-      audience={config.audience}
-      onRedirectCallback={onRedirectCallback}
-    >
+  <Auth0Provider
+    domain={config.domain}
+    client_id={config.clientId}
+    redirect_uri={window.location.origin}
+    audience={config.audience}
+    onRedirectCallback={onRedirectCallback}
+  >
+    <ApolloWrapper>
       <App />
-    </Auth0Provider>
-  </ApolloProvider>,
+    </ApolloWrapper>
+  </Auth0Provider>,
   document.getElementById("root")
 );
 

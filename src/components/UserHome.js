@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
+import { useQuery, gql } from "@apollo/client";
 import { useAuth0 } from "../react-auth0-spa";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
