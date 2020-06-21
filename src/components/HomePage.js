@@ -7,6 +7,7 @@ import { Typography } from "@material-ui/core";
 
 import Splash from "./Splash";
 import Loading from "./Loading";
+import UserHome from "./UserHome";
 
 const HomePage = () => {
   const { user, loading } = useAuth0();
@@ -17,17 +18,7 @@ const HomePage = () => {
       {!loading && (
         <>
           {!user && <Splash />}
-          {user && (
-            <>
-              <h1 className="home-welcome">Welcome, {user.name}</h1>
-              <div className="home-content">
-                <Typography variant="h5" component="h5">
-                  My Forms
-                </Typography>
-              </div>
-              <div className="sets-container">forms here</div>
-            </>
-          )}
+          {user && <UserHome user={user} />}
         </>
       )}
     </>

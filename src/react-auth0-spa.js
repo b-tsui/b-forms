@@ -56,6 +56,7 @@ export const Auth0Provider = ({
         let res = await addUser({
           variables: { input: { name: user.nickname, email: user.email } },
         });
+        //localStorage.setItem("userId", res.data.addUser.id);
         setUser({ ...user, userId: res.data.addUser.id });
       }
 
