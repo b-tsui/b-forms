@@ -62,7 +62,7 @@ export const Auth0Provider = ({
           body: JSON.stringify({ query: ADD_USER, variables }),
         });
         const { data } = await res.json();
-        //localStorage.setItem("userId", res.data.addUser.id);
+        //adds db userId to auth0 user context
         setUser({ ...user, userId: data.addUser.id });
       }
 

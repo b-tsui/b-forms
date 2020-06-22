@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import { api } from "../config";
 import "../styles/home-forms.css";
+import { gql, useMutation } from "@apollo/client";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -33,12 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ADD_FORM = gql`
+  mutation AddForm($input: AddFormInput!) {
+    addForm(input: $input) {
+      id
+      userId
+      title
+      description
+    }
+  }
+`;
+
 export default function CreateForm() {
   const classes = useStyles();
   const { user, getTokenSilently } = useAuth0();
   const [open, setOpen] = useState(false);
-  const [setName, setFormName] = useState("");
-  const [setDesc, setFormDesc] = useState("");
+  const [formName, setFormName] = useState("");
+  const [formDesc, setFormDesc] = useState("");
+  const [addForm, { loading, data }] = useMutation(ADD_FORM);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,6 +72,17 @@ export default function CreateForm() {
   const handleAddForm = async (e) => {
     e.preventDefault();
     if (user) {
+      let res = await addForm({
+        variables: {
+          input: {
+            userId: user.userId,
+            title: formName,
+            description: formDesc,
+          },
+        },
+      });
+      console.log(res);
+      window.location.href = `form/${res.data.addForm.id}`;
     }
   };
 
@@ -110,7 +134,7 @@ export default function CreateForm() {
                 InputLabelProps={{ style: { color: "gray" } }}
                 margin="dense"
                 id="form-desc-input"
-                label="form Description..."
+                label="Form Description..."
                 type="text"
                 fullWidth
                 onChange={handleFormDesc}
