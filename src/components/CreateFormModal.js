@@ -45,7 +45,7 @@ const ADD_FORM = gql`
   }
 `;
 
-export default function CreateForm() {
+export default function CreateFormModal() {
   const classes = useStyles();
   const { user, getTokenSilently } = useAuth0();
   const [open, setOpen] = useState(false);
@@ -82,7 +82,7 @@ export default function CreateForm() {
         },
       });
       console.log(res);
-      window.location.href = `form/${res.data.addForm.id}`;
+      window.location.href = `/form/create/${res.data.addForm.id}`;
     }
   };
 

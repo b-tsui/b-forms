@@ -6,6 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import HomePage from "./components/HomePage";
+import CreateFormPage from "./components/CreateFormPage";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute
+            path="/form/create/:formId"
+            component={CreateFormPage}
+          />
         </Switch>
       </Router>
     </div>

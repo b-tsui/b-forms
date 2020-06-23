@@ -59,7 +59,7 @@ export default function SingleForm({ form }) {
               <MoreVertIcon />
             </IconButton>
           </div>
-          <Link to={{ pathname: `/forms/${form.id}` }}>
+          <Link to={{ pathname: `/form/create/${form.id}` }}>
             <CardMedia
               className={classes.media}
               image="https://clackurbucket.s3.us-east-2.amazonaws.com/default-form.png"
