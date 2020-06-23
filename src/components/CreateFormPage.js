@@ -5,6 +5,7 @@ import "../styles/create-form.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -63,6 +64,9 @@ export default function CreateFormPage({
             <CreateSingleQuestion question={question} />
           ))}
       </div>
+      <Button variant="contained" color="primary">
+        Primary
+      </Button>
     </>
   );
 }

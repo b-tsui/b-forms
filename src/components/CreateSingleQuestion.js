@@ -22,19 +22,34 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NativeSelect from "@material-ui/core/NativeSelect";
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export default function CreateSingleQuestion({ question }) {
-  const [updateTitle, setUpdateTitle] = useState(question.title);
-  const [updateDescription, setUpdateDescription] = useState(
-    question.description
-  );
+  const classes = useStyles();
+  const [questionName, setQuestionName] = useState(question.question);
+  const [questionType, setQuestionType] = useState(question.questionType);
+  const [questionOptions, setQuestionOptions] = useState(question.options);
 
-  const handleUpdateTitle = async (e) => {
-    setUpdateTitle(e.target.value);
+  const handleQuestionName = async (e) => {
+    setQuestionName(e.target.value);
   };
 
-  const handleUpdateDescription = async (e) => {
-    setUpdateDescription(e.target.value);
+  const handleQuestionType = async (e) => {
+    setQuestionType(e.target.value);
   };
   return (
     <>
@@ -45,24 +60,36 @@ export default function CreateSingleQuestion({ question }) {
             autoFocus
             InputLabelProps={{ style: { color: "lightgray" } }}
             margin="dense"
-            id="set-title-input"
-            label="Set Title..."
+            id="set-question-input"
+            label="Set Quesion..."
             type="text"
             fullWidth
-            value={updateTitle}
-            onChange={handleUpdateTitle}
+            value={questionName}
+            onChange={handleQuestionName}
           />
-          <TextField
-            autoComplete="off"
-            InputLabelProps={{ style: { color: "lightgray" } }}
-            margin="dense"
-            id="set-desc-input"
-            label="Set Description..."
-            type="text"
-            fullWidth
-            value={updateDescription}
-            onChange={handleUpdateDescription}
-          />
+          <FormControl className={classes.formControl}>
+            <InputLabel>Question type</InputLabel>
+            <Select
+              native
+              value={questionType}
+              onChange={handleQuestionType}
+              inputProps={{
+                name: "Question Type",
+                id: "age-native-simple",
+              }}
+            >
+              <option aria-label="None" value="" />
+              <option value="Text">Text</option>
+              <option value="MC">Multiple Choice</option>
+            </Select>
+          </FormControl>
+          {questionOptions && questionType === "MC" && (
+            <>
+              {questionOptions.map((option) => (
+                <div>{option}</div>
+              ))}
+            </>
+          )}
           <Button type="submit" color="primary">
             Save
           </Button>
