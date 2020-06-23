@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 import { api } from "../config";
+import { gql, useQuery, useMutation } from "@apollo/client";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -18,6 +19,17 @@ import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { Paper } from "@material-ui/core";
 
+const DELETE_QUESTION = gql`
+  mutation Delete($input: DeleteQuestionInput!) {
+    deleteQuestion(input: $input) {
+      id
+      question
+      questionType
+      options
+    }
+  }
+`;
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -28,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateSingleQuestion({ question }) {
+export default function CreateSingleQuestion({ question, refetch }) {
+  const [deleteQuestion] = useMutation(DELETE_QUESTION);
   const classes = useStyles();
   const [questionName, setQuestionName] = useState(question.question);
   const [questionType, setQuestionType] = useState(question.questionType);
@@ -41,6 +54,14 @@ export default function CreateSingleQuestion({ question }) {
   const handleQuestionType = (e) => {
     setQuestionType(e.target.value);
   };
+
+  const handleQuestionDelete = async (e) => {
+    await deleteQuestion({ variables: { input: { id: question.id } } });
+    refetch();
+  };
+
+  const handleQuestionUpdate = (e) => {};
+
   return (
     <>
       <Paper elevation={3} className="create-question-container">
@@ -51,7 +72,7 @@ export default function CreateSingleQuestion({ question }) {
             InputLabelProps={{ style: { color: "lightgray" } }}
             margin="dense"
             id="set-question-input"
-            label="Set Quesion..."
+            label="Enter Quesion..."
             type="text"
             fullWidth
             value={questionName}
@@ -71,9 +92,14 @@ export default function CreateSingleQuestion({ question }) {
               ))}
             </>
           )}
-          <Button type="submit" color="primary">
-            Save
-          </Button>
+          <div className="create-question-button-container">
+            <Button color="primary" onClick={handleQuestionUpdate}>
+              Save
+            </Button>
+            <Button color="secondary" onClick={handleQuestionDelete}>
+              Delete
+            </Button>
+          </div>
         </form>
       </Paper>
     </>

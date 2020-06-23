@@ -82,7 +82,7 @@ export default function CreateFormPage({
         </Paper>
         {data.form.questions &&
           data.form.questions.map((question) => (
-            <CreateSingleQuestion question={question} />
+            <CreateSingleQuestion question={question} refetch={refetch} />
           ))}
         <Button variant="contained" color="primary" onClick={handleAddQuestion}>
           <AddCircleIcon />
