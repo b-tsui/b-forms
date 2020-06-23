@@ -39,6 +39,7 @@ const ADD_QUESTION = gql`
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    margin: "15px",
     display: "flex",
     flexWrap: "wrap",
     "& > *": {

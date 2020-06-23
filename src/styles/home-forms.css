@@ -11,6 +11,7 @@
 #single-form:hover {
   border-bottom: 4px solid #3f51b5;
 }
+
 #single-form-description {
   overflow: hidden;
   padding-top: 10px;
@@ -80,11 +81,8 @@
   display: flex;
 }
 
-.MuiButtonBase-root {
-  border-radius: none;
-  position: fixed;
+button.MuiButtonBase-root {
   display: flex;
-  justify-content: flex-end;
 }
 #single-form-options {
   position: absolute;
