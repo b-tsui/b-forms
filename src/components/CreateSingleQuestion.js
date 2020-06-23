@@ -44,11 +44,11 @@ export default function CreateSingleQuestion({ question }) {
   const [questionType, setQuestionType] = useState(question.questionType);
   const [questionOptions, setQuestionOptions] = useState(question.options);
 
-  const handleQuestionName = async (e) => {
+  const handleQuestionName = (e) => {
     setQuestionName(e.target.value);
   };
 
-  const handleQuestionType = async (e) => {
+  const handleQuestionType = (e) => {
     setQuestionType(e.target.value);
   };
   return (
@@ -69,16 +69,7 @@ export default function CreateSingleQuestion({ question }) {
           />
           <FormControl className={classes.formControl}>
             <InputLabel>Question type</InputLabel>
-            <Select
-              native
-              value={questionType}
-              onChange={handleQuestionType}
-              inputProps={{
-                name: "Question Type",
-                id: "age-native-simple",
-              }}
-            >
-              <option aria-label="None" value="" />
+            <Select native value={questionType} onChange={handleQuestionType}>
               <option value="Text">Text</option>
               <option value="MC">Multiple Choice</option>
             </Select>

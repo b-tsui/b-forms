@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import CreateSingleQuestion from "./CreateSingleQuestion";
 import "../styles/create-form.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -21,6 +22,17 @@ const GET_FORM = gql`
         options
       }
       createdAt
+    }
+  }
+`;
+
+const ADD_QUESTION = gql`
+  mutation AddForm($input: AddQuestionInput!) {
+    addQuestion(input: $input) {
+      id
+      question
+      questionType
+      options
     }
   }
 `;
@@ -42,12 +54,20 @@ export default function CreateFormPage({
     params: { formId },
   },
 }) {
-  const { loading, error, data } = useQuery(GET_FORM, {
+  const { loading, error, data, refetch } = useQuery(GET_FORM, {
     variables: { id: formId },
   });
+  const [addQuestion] = useMutation(ADD_QUESTION);
   const classes = useStyles();
+  //for query loading
   if (loading) return null;
   if (error) return `Error! ${error}`;
+
+  const handleAddQuestion = async (e) => {
+    await addQuestion({ variables: { input: { formId } } });
+    //update cache with new question
+    refetch();
+  };
 
   return (
     <>
@@ -63,10 +83,11 @@ export default function CreateFormPage({
           data.form.questions.map((question) => (
             <CreateSingleQuestion question={question} />
           ))}
+        <Button variant="contained" color="primary" onClick={handleAddQuestion}>
+          <AddCircleIcon />
+          &nbsp; Add Question
+        </Button>
       </div>
-      <Button variant="contained" color="primary">
-        Primary
-      </Button>
     </>
   );
 }
