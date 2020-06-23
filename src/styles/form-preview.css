@@ -1,0 +1,26 @@
+.create-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-preview-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-preview-question-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  width: 60%;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.create-preview-question-name {
+  font-size: 1.2em;
+  font-weight: 600;
+  padding-bottom: 10px;
+}

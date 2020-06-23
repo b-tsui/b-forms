@@ -7,6 +7,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import PropTypes from "prop-types";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import CreateFormPreview from "./CreateFormPreview";
+import CreateFormShareDialog from "./CreateFormShareDialog";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -39,6 +46,39 @@ const ADD_QUESTION = gql`
   }
 `;
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "15px",
@@ -62,6 +102,7 @@ export default function CreateFormPage({
   });
   const [addQuestion] = useMutation(ADD_QUESTION);
   const classes = useStyles();
+  const [value, setValue] = useState(0); //for tab panel
   //for query loading
   if (loading) return null;
   if (error) return `Error! ${error}`;
@@ -70,6 +111,10 @@ export default function CreateFormPage({
     await addQuestion({ variables: { input: { formId } } });
     //update cache with new question
     refetch();
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -81,15 +126,49 @@ export default function CreateFormPage({
             Number(data.form.createdAt)
           ).toLocaleDateString("en-US")}`}</div>
           <div className="create-form-description">{data.form.description}</div>
+          <CreateFormShareDialog formId={formId} />
         </Paper>
-        {data.form.questions &&
-          data.form.questions.map((question) => (
-            <CreateSingleQuestion question={question} refetch={refetch} />
-          ))}
-        <Button variant="contained" color="primary" onClick={handleAddQuestion}>
-          <AddCircleIcon />
-          &nbsp; Add Question
-        </Button>
+        <Paper square className="create-form-tabs-container">
+          <Tabs
+            value={value}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={handleChange}
+            aria-label="disabled tabs example"
+          >
+            <Tab
+              inkBarStyle={{ background: "blue" }}
+              label="Questions"
+              {...a11yProps(0)}
+            />
+            <Tab label="Form Preview" {...a11yProps(1)} />
+            <Tab label="Analytics" {...a11yProps(2)} />
+          </Tabs>
+        </Paper>
+        <TabPanel value={value} index={0}>
+          {data.form.questions &&
+            data.form.questions.map((question) => (
+              <CreateSingleQuestion question={question} refetch={refetch} />
+            ))}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddQuestion}
+          >
+            <AddCircleIcon />
+            &nbsp; Add Question
+          </Button>
+        </TabPanel>
+        <TabPanel
+          value={value}
+          index={1}
+          className="create-form-preview-container"
+        >
+          <CreateFormPreview form={data.form} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          Analytics
+        </TabPanel>
       </div>
     </>
   );

@@ -41,6 +41,34 @@
   margin-bottom: 10px;
 }
 
+.create-question-option-container {
+  display: flex;
+}
+
+button.create-question-option-delete {
+  align-self: flex-end;
+  min-width: 35px;
+  height: 35px;
+}
+
 .create-question-button-container {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#create-form-share-text {
+  border: none;
+  overflow: auto;
+  outline: none;
+  width: 100%;
+  font-family: "open sans", arial, sans-serif;
+  font-size: 1rem;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
 }

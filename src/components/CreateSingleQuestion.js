@@ -10,6 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -18,6 +19,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 const DELETE_QUESTION = gql`
   mutation DeleteQuestion($input: DeleteQuestionInput!) {
@@ -85,6 +87,23 @@ export default function CreateSingleQuestion({ question, refetch }) {
         },
       },
     });
+    refetch();
+  };
+
+  const handleOptions = (i, e) => {
+    let questionOptionsCopy = [...questionOptions];
+    questionOptionsCopy[i] = e.target.value;
+    setQuestionOptions(questionOptionsCopy);
+  };
+
+  const handleAddOption = async (e) => {
+    setQuestionOptions([...questionOptions, ""]);
+  };
+
+  const handleDeleteOption = async (i, e) => {
+    let questionOptionsCopy = [...questionOptions];
+    questionOptionsCopy.splice(i, 1);
+    setQuestionOptions(questionOptionsCopy);
   };
 
   return (
@@ -93,7 +112,6 @@ export default function CreateSingleQuestion({ question, refetch }) {
         <form>
           <TextField
             autoComplete="off"
-            autoFocus
             InputLabelProps={{ style: { color: "lightgray" } }}
             margin="dense"
             id="set-question-input"
@@ -112,16 +130,49 @@ export default function CreateSingleQuestion({ question, refetch }) {
           </FormControl>
           {questionOptions && questionType === "MC" && (
             <>
-              {questionOptions.map((option) => (
-                <div>{option}</div>
+              <div>Multiple Choice Options:</div>
+              {questionOptions.map((option, i) => (
+                <div className="create-question-option-container">
+                  <TextField
+                    autoComplete="off"
+                    InputLabelProps={{ style: { color: "lightgray" } }}
+                    margin="dense"
+                    className="set-option-input"
+                    label="Enter Option..."
+                    type="text"
+                    fullWidth
+                    value={option}
+                    onChange={(e) => handleOptions(i, e)}
+                  />
+                  <Button
+                    color="secondary"
+                    size="small"
+                    className="create-question-option-delete"
+                    onClick={(e) => handleDeleteOption(i, e)}
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </Button>
+                </div>
               ))}
+              <Button size="small" color="primary" onClick={handleAddOption}>
+                <AddIcon fontSize="small" />
+                &nbsp;Add Option
+              </Button>
             </>
           )}
           <div className="create-question-button-container">
-            <Button color="primary" onClick={handleQuestionUpdate}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleQuestionUpdate}
+            >
               Save
             </Button>
-            <Button color="secondary" onClick={handleQuestionDelete}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleQuestionDelete}
+            >
               Delete
             </Button>
           </div>
