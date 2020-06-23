@@ -20,9 +20,21 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import { Paper } from "@material-ui/core";
 
 const DELETE_QUESTION = gql`
-  mutation Delete($input: DeleteQuestionInput!) {
+  mutation DeleteQuestion($input: DeleteQuestionInput!) {
     deleteQuestion(input: $input) {
       id
+      question
+      questionType
+      options
+    }
+  }
+`;
+
+const UPDATE_QUESTION = gql`
+  mutation UpdateQuestion($input: UpdateQuestionInput!) {
+    updateQuestion(input: $input) {
+      id
+      formId
       question
       questionType
       options
@@ -42,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateSingleQuestion({ question, refetch }) {
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
+  const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const classes = useStyles();
   const [questionName, setQuestionName] = useState(question.question);
   const [questionType, setQuestionType] = useState(question.questionType);
@@ -60,7 +73,19 @@ export default function CreateSingleQuestion({ question, refetch }) {
     refetch();
   };
 
-  const handleQuestionUpdate = (e) => {};
+  const handleQuestionUpdate = async (e) => {
+    await updateQuestion({
+      variables: {
+        input: {
+          id: question.id,
+          formId: question.formId,
+          question: questionName,
+          questionType: questionType,
+          options: questionOptions,
+        },
+      },
+    });
+  };
 
   return (
     <>

@@ -17,6 +17,7 @@ const GET_FORM = gql`
       description
       questions {
         id
+        formId
         question
         questionType
         options
@@ -27,9 +28,10 @@ const GET_FORM = gql`
 `;
 
 const ADD_QUESTION = gql`
-  mutation AddForm($input: AddQuestionInput!) {
+  mutation AddQuestion($input: AddQuestionInput!) {
     addQuestion(input: $input) {
       id
+      formId
       question
       questionType
       options
