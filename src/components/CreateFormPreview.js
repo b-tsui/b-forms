@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "../styles/form-preview.css";
-import ClientSingleQuestionPreview from "./CreateSingleQuestionPreview";
+import CreateSingleQuestionPreview from "./CreateSingleQuestionPreview";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -22,7 +22,7 @@ export default function CreateFormPreview({ form }) {
         <h2>form preview</h2>
         <form className="create-preview-form-container">
           {form.questions.map((question) => (
-            <ClientSingleQuestionPreview question={question} />
+            <CreateSingleQuestionPreview question={question} />
           ))}
         </form>
       </div>

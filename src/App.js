@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import NavBar from "./components/NavBar";
 
 import PrivateRoute from "./components/PrivateRoute";
@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import history from "./utils/history";
 import HomePage from "./components/HomePage";
 import CreateFormPage from "./components/CreateFormPage";
+import ClientForm from "./components/ClientForm";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             path="/form/create/:formId"
             component={CreateFormPage}
           />
+          <Route path="/form/respond/:formId" component={ClientForm} />
         </Switch>
       </Router>
     </div>

@@ -20,11 +20,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateSingleQuestionPreview({ question }) {
+export default function ClientSingleQuestion({
+  question,
+  answers,
+  setAnswers,
+}) {
   const [value, setValue] = useState("");
-
   const handleChange = (e) => {
     setValue(e.target.value);
+    let answered = answers.filter(
+      (answer) => answer.questionId === question.id
+    );
+    if (answered.length === 0) {
+      setAnswers([
+        ...answers,
+        { questionId: question.id, answer: e.target.value },
+      ]);
+    } else {
+      let answersCopy = [...answers];
+      const newAnswers = answersCopy.map((answer) => {
+        if (answer.questionId === question.id) {
+          return {
+            questionId: question.id,
+            answer: e.target.value,
+          };
+        }
+        return answer;
+      });
+      setAnswers(newAnswers);
+    }
   };
 
   return (
@@ -40,6 +64,7 @@ export default function CreateSingleQuestionPreview({ question }) {
               label="Enter Response..."
               type="text"
               fullWidth
+              value={value}
               onChange={handleChange}
             />
           </>
@@ -47,6 +72,7 @@ export default function CreateSingleQuestionPreview({ question }) {
         {question.questionType === "MC" && (
           <>
             <FormControl component="fieldset">
+              {/* <FormLabel component="legend">Options</FormLabel> */}
               <RadioGroup
                 aria-label="answer options"
                 name="options"
