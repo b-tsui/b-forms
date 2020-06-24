@@ -1,0 +1,22 @@
+.thank-you-page {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  font-family: "open sans", arial, sans-serif;
+}
+
+.thank-you-container {
+  width: 80vw;
+  min-width: 300px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+}
+
+.thank-you-title {
+  font-family: "open sans", arial, sans-serif;
+  font-size: 1.8em;
+  padding-bottom: 25px;
+}

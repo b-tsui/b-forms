@@ -34,6 +34,16 @@ const GET_FORM = gql`
   }
 `;
 
+const ADD_ANSWER = gql`
+  mutation AddAnswer($input: AddAnswerInput!) {
+    addAnswer(input: $input) {
+      id
+      questionId
+      answer
+    }
+  }
+`;
+
 export default function ClientForm({
   match: {
     params: { formId },
@@ -42,14 +52,28 @@ export default function ClientForm({
   const { loading, error, data, refetch } = useQuery(GET_FORM, {
     variables: { id: formId },
   });
+  const [addAnswer] = useMutation(ADD_ANSWER);
   const [answers, setAnswers] = useState([]);
+
   //for query loading
   if (loading) return null;
   if (error) return `Error! ${error}`;
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    answers.forEach(async (answer) => {
+      await addAnswer({
+        variables: {
+          input: answer,
+        },
+      });
+    });
+    window.location.href = "/form/submitted";
+  };
+
   return (
     <>
-      <form className="client-form-container">
+      <form className="client-form-container" onSubmit={handleSubmit}>
         <Paper elevation={3} className="create-form-header">
           <div className="create-form-title">{data.form.title}</div>
           <div className="create-form-date">{`Created ${new Date(
@@ -65,6 +89,11 @@ export default function ClientForm({
               setAnswers={setAnswers}
             />
           ))}
+        </div>
+        <div className="create-question-button-container">
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
         </div>
       </form>
     </>

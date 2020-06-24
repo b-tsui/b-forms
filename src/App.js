@@ -8,6 +8,7 @@ import history from "./utils/history";
 import HomePage from "./components/HomePage";
 import CreateFormPage from "./components/CreateFormPage";
 import ClientForm from "./components/ClientForm";
+import FormSubmitted from "./components/FormSubmitted";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             component={CreateFormPage}
           />
           <Route path="/form/respond/:formId" component={ClientForm} />
+          <Route path="/form/submitted" component={FormSubmitted} />
         </Switch>
       </Router>
     </div>

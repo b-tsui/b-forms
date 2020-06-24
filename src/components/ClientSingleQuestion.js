@@ -64,6 +64,7 @@ export default function ClientSingleQuestion({
               label="Enter Response..."
               type="text"
               fullWidth
+              required
               value={value}
               onChange={handleChange}
             />
@@ -77,12 +78,13 @@ export default function ClientSingleQuestion({
                 aria-label="answer options"
                 name="options"
                 value={value}
+                required
                 onChange={handleChange}
               >
                 {question.options.map((option) => (
                   <FormControlLabel
                     value={option}
-                    control={<Radio color="primary" />}
+                    control={<Radio required color="primary" />}
                     label={option}
                   />
                 ))}
