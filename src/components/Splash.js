@@ -24,17 +24,17 @@ const Splash = () => {
     <div>
       {/* -----basic config-----*/}
       <Parallax
-        blur={5}
+        blur={6}
         bgImage={require("../images/splash1.jpeg")}
         bgImageAlt="the cat"
         strength={800}
       >
         <div
-          style={{ height: "calc(100vh - 64px)" }}
+          style={{ height: "calc(90vh - 64px)" }}
           className="splash-title-container"
         >
+          <div className="splash-title-text">Create 🅱️etter Forms</div>
           <Paper elevation={3} className="splash-title">
-            <h2 className="splash-title-text">Create 🅱️etter Forms</h2>
             <div>
               Get started creating better forms by signing up or login in!
             </div>
@@ -45,22 +45,21 @@ const Splash = () => {
           </Paper>
         </div>
       </Parallax>
-      <div className={classes.root}>
-        <Paper elevation={0} />
-        <Paper />
-        <Paper elevation={3} />
+      <div className={classes.root} id="splash-paper-container">
+        <Paper elevation={3}>Create forms</Paper>
+        <Paper elevation={3}>Share forms</Paper>
+        <Paper elevation={3}>Analyze forms</Paper>
       </div>
       {/* -----dynamic blur-----*/}
       {/* <Background className="custom-bg">
       <img src="http://www.fillmurray.com/500/320" alt="fill murray" />
     </Background> */}
       <Parallax
-        blur={{ min: -15, max: 15 }}
-        bgImage={require("../images/splash1.jpeg")}
+        blur={8}
+        bgImage={require("../images/Splash2.jpg")}
         bgImageAlt="the dog"
-        strength={-200}
+        strength={800}
       >
-        Blur transition from min to max
         <div style={{ height: "calc(100vh - 64px)" }} />
       </Parallax>
 

@@ -18,9 +18,12 @@ const GET_USER_FORMS = gql`
 `;
 
 const UserHome = ({ user }) => {
-  const { loading: gqlLoading, error, data } = useQuery(GET_USER_FORMS, {
-    variables: { userId: user.userId },
-  });
+  const { loading: gqlLoading, error, data, refetch } = useQuery(
+    GET_USER_FORMS,
+    {
+      variables: { userId: user.userId },
+    }
+  );
   if (gqlLoading) return <Loading />;
   if (error) return `Error! ${error.message}`;
 
@@ -37,7 +40,7 @@ const UserHome = ({ user }) => {
           forms here
           <CreateFormModal />
           {data.userForms.map((form) => (
-            <SingleForm form={form} />
+            <SingleForm form={form} refetch={refetch} />
           ))}
         </div>
       </>

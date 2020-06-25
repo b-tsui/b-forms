@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/home-forms.css";
 import { useAuth0 } from "../react-auth0-spa";
 import { api } from "../config";
+import SingleFormShareDialogue from "./SingleFormShareDialogue";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -14,18 +15,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-// import Button from "@material-ui/core/Button";
-// import Menu from "@material-ui/core/Menu";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-// import DeleteIcon from "@material-ui/icons/Delete";
-
-// import Dialog from "@material-ui/core/Dialog";
-// import DialogActions from "@material-ui/core/DialogActions";
-// import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-// import DialogTitle from "@material-ui/core/DialogTitle";
-// import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import SingleFormDeleteDialog from "./SingleFormDeleteDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,11 +30,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SingleForm({ form }) {
+export default function SingleForm({ form, refetch }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   return (
     <>
@@ -58,6 +56,24 @@ export default function SingleForm({ form }) {
             >
               <MoreVertIcon />
             </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <SingleFormShareDialogue formId={form.id} />
+              </MenuItem>
+              <MenuItem className="delete-button" onClick={handleClose}>
+                <SingleFormDeleteDialog
+                  formId={form.id}
+                  formTitle={form.title}
+                  refetch={refetch}
+                />
+              </MenuItem>
+            </Menu>
           </div>
           <Link to={{ pathname: `/form/create/${form.id}` }}>
             <CardMedia
@@ -83,44 +99,6 @@ export default function SingleForm({ form }) {
               </Typography>
             </CardContent>
           </Link>
-          {/* <CardActions className="single-set-actions-container">
-            <div>
-              <IconButton
-                aria-label="add to favorites"
-                onClick={favoriteHandler}
-                style={{
-                  padding: "2px",
-                  color: isFavorited ? "#ffd54f" : "#eeeeee",
-                }}
-              >
-                <StarIcon />
-              </IconButton>
-            </div>
-            <div className="set-votes-container">
-              <IconButton
-                id="upvote-button"
-                onClick={(e) => voteHandler(e, true)}
-                style={{
-                  padding: "2px",
-                  color: isUpvoted ? "#9fa8da" : "#eeeeee",
-                }}
-              >
-                <ThumbUpAltIcon style={{ padding: "2px" }} />
-                <Typography variant="subtitle1">{upvotes}</Typography>
-              </IconButton>
-              <IconButton
-                id="downvote-button"
-                onClick={(e) => voteHandler(e, false)}
-                style={{
-                  padding: "2px",
-                  color: isUpvoted === false ? "#e57373" : "#eeeeee",
-                }}
-              >
-                <ThumbDownAltIcon style={{ padding: "2px" }} />
-                <Typography variant="subtitle1">{-1 * downvotes}</Typography>
-              </IconButton>
-            </div>
-          </CardActions> */}
         </Card>
       </div>
     </>

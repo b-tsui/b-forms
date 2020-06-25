@@ -106,7 +106,7 @@ export default function CreateFormModal() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         PaperProps={{
-          style: { borderRadius: "8px", backgroundColor: "lightgray" },
+          style: { borderRadius: "8px" },
         }}
       >
         <form onSubmit={handleAddForm}>

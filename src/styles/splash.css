@@ -1,14 +1,31 @@
 .splash-title-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: Center;
+  padding-top: 15%;
 }
 div.splash-title {
   font-family: "open sans", arial, sans-serif;
   display: flex;
+  width: 250px;
+  min-width: 250px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 25px;
   background-color: rgba(255, 255, 255, 0.9);
+}
+
+.splash-title-text {
+  font-size: 3em;
+  font-weight: bold;
+  font-family: "open sans", arial, sans-serif;
+  text-shadow: white 0px 0px 5px;
+  padding-bottom: 25px;
+}
+
+#splash-paper-container {
+  display: flex;
+  justify-content: space-evenly;
 }
