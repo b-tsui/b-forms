@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/home-forms.css";
+import "../../styles/home-forms.css";
 import SingleFormShareDialogue from "./SingleFormShareDialogue";
 
 import { makeStyles } from "@material-ui/core/styles";

@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/form-preview.css";
+import "../../styles/form-preview.css";
 import CreateSingleQuestionPreview from "./CreateSingleQuestionPreview";
 
 export default function CreateFormPreview({ form }) {

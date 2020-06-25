@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Paper } from "@material-ui/core";
-import "../styles/form-preview.css";
+import "../../styles/form-preview.css";
 import TextField from "@material-ui/core/TextField";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";

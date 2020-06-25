@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import "../styles/client-form.css";
+import "../../styles/client-form.css";
 import ClientSingleQuestion from "./ClientSingleQuestion";
 
 import Paper from "@material-ui/core/Paper";

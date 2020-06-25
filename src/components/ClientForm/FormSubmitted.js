@@ -1,7 +1,7 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import checkMark from "../images/Checkmark.svg";
-import "../styles/form-submitted.css";
+import checkMark from "../../images/Checkmark.svg";
+import "../../styles/form-submitted.css";
 
 export default function FormSubmitted() {
   return (

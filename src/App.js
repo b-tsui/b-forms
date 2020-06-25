@@ -6,9 +6,9 @@ import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import HomePage from "./components/HomePage";
-import CreateFormPage from "./components/CreateFormPage";
-import ClientForm from "./components/ClientForm";
-import FormSubmitted from "./components/FormSubmitted";
+import CreateFormPage from "./components/CreateForm/CreateFormPage";
+import ClientForm from "./components/ClientForm/ClientForm";
+import FormSubmitted from "./components/ClientForm/FormSubmitted";
 
 function App() {
   return (

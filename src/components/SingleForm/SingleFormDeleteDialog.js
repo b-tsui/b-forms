@@ -8,7 +8,7 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import Typography from "@material-ui/core/Typography";
 
-import "../styles/create-form.css";
+import "../../styles/create-form.css";
 
 const DELETE_FORM = gql`
   mutation DeleteForm($input: DeleteFormInput!) {

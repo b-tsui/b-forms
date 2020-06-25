@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
-import SingleForm from "./SingleForm";
-import CreateFormModal from "./CreateFormModal";
+import SingleForm from "./SingleForm/SingleForm";
+import CreateFormModal from "./CreateForm/CreateFormModal";
 
 const GET_USER_FORMS = gql`
   query UserForms($userId: ID!) {

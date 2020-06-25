@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import CreateSingleQuestion from "./CreateSingleQuestion";
-import "../styles/create-form.css";
+import "../../styles/create-form.css";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -14,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import CreateFormPreview from "./CreateFormPreview";
 import CreateFormShareDialog from "./CreateFormShareDialog";
+import FormAnalytics from "../FormAnalytics/FormAnalytics";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -157,7 +157,7 @@ export default function CreateFormPage({
           <CreateFormPreview form={data.form} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Analytics
+          <FormAnalytics form={data.form} />
         </TabPanel>
       </div>
     </>

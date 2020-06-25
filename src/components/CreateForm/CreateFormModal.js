@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAuth0 } from "../react-auth0-spa";
-import "../styles/home-forms.css";
+import { useAuth0 } from "../../react-auth0-spa";
+import "../../styles/home-forms.css";
 import { gql, useMutation } from "@apollo/client";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -85,7 +85,6 @@ export default function CreateFormModal() {
   return (
     <>
       <Card
-        className={classes.root}
         className={classes.root}
         variant="outlined"
         onClick={handleClickOpen}
