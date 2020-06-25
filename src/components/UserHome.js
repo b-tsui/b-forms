@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { useAuth0 } from "../react-auth0-spa";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
 import SingleForm from "./SingleForm";
@@ -37,10 +36,9 @@ const UserHome = ({ user }) => {
           </Typography>
         </div>
         <div className="sets-container">
-          forms here
           <CreateFormModal />
           {data.userForms.map((form) => (
-            <SingleForm form={form} refetch={refetch} />
+            <SingleForm form={form} refetch={refetch} key={form.id} />
           ))}
         </div>
       </>

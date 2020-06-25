@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import CreateSingleQuestion from "./CreateSingleQuestion";
 import "../styles/create-form.css";
@@ -79,19 +79,6 @@ function a11yProps(index) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "15px",
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1),
-      width: theme.spacing(16),
-      height: theme.spacing(16),
-    },
-  },
-}));
-
 export default function CreateFormPage({
   match: {
     params: { formId },
@@ -101,7 +88,6 @@ export default function CreateFormPage({
     variables: { id: formId },
   });
   const [addQuestion] = useMutation(ADD_QUESTION);
-  const classes = useStyles();
   const [value, setValue] = useState(0); //for tab panel
   //for query loading
   if (loading) return null;
@@ -148,7 +134,11 @@ export default function CreateFormPage({
         <TabPanel value={value} index={0}>
           {data.form.questions &&
             data.form.questions.map((question) => (
-              <CreateSingleQuestion question={question} refetch={refetch} />
+              <CreateSingleQuestion
+                question={question}
+                refetch={refetch}
+                key={question.id}
+              />
             ))}
           <Button
             variant="contained"

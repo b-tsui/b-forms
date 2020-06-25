@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth0 } from "../react-auth0-spa";
-import { api } from "../config";
 import "../styles/home-forms.css";
 import { gql, useMutation } from "@apollo/client";
 
@@ -15,9 +14,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +43,11 @@ const ADD_FORM = gql`
 
 export default function CreateFormModal() {
   const classes = useStyles();
-  const { user, getTokenSilently } = useAuth0();
+  const { user } = useAuth0();
   const [open, setOpen] = useState(false);
   const [formName, setFormName] = useState("");
   const [formDesc, setFormDesc] = useState("");
-  const [addForm, { loading, data }] = useMutation(ADD_FORM);
+  const [addForm] = useMutation(ADD_FORM);
 
   const handleClickOpen = () => {
     setOpen(true);

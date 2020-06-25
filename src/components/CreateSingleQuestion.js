@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useAuth0 } from "../react-auth0-spa";
-import { api } from "../config";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import React, { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
+
 import { Paper } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
 
 const DELETE_QUESTION = gql`
   mutation DeleteQuestion($input: DeleteQuestionInput!) {
@@ -143,14 +137,16 @@ export default function CreateSingleQuestion({ question, refetch }) {
                     fullWidth
                     value={option}
                     onChange={(e) => handleOptions(i, e)}
+                    key={i}
                   />
                   <Button
                     color="secondary"
                     size="small"
                     className="create-question-option-delete"
                     onClick={(e) => handleDeleteOption(i, e)}
+                    key={i}
                   >
-                    <DeleteIcon fontSize="small" />
+                    <DeleteIcon fontSize="small" key={i} />
                   </Button>
                 </div>
               ))}
