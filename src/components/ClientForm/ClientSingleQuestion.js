@@ -8,6 +8,10 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 export default function ClientSingleQuestion({
   question,
@@ -15,11 +19,12 @@ export default function ClientSingleQuestion({
   setAnswers,
 }) {
   const [value, setValue] = useState("");
+  const [state, setState] = useState({});
+
+  let answered = answers.filter((answer) => answer.questionId === question.id);
+
   const handleChange = (e) => {
     setValue(e.target.value);
-    let answered = answers.filter(
-      (answer) => answer.questionId === question.id
-    );
     if (answered.length === 0) {
       setAnswers([
         ...answers,
@@ -39,6 +44,12 @@ export default function ClientSingleQuestion({
       setAnswers(newAnswers);
     }
   };
+  const updateAnswers = (e) => {};
+  const handleCheckboxChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.checked });
+    /*create array of answers, delete answers in current array matching qID, 
+    set answers with current answers + new answers*/
+  };
 
   return (
     <>
@@ -56,6 +67,23 @@ export default function ClientSingleQuestion({
               required
               value={value}
               onChange={handleChange}
+            />
+          </>
+        )}
+        {question.questionType === "Paragraph" && (
+          <>
+            <TextField
+              autoComplete="off"
+              InputLabelProps={{ style: { color: "lightgray" } }}
+              margin="dense"
+              label="Enter Response..."
+              type="text"
+              fullWidth
+              required
+              value={value}
+              onChange={handleChange}
+              multiline
+              rows={5}
             />
           </>
         )}
@@ -79,6 +107,25 @@ export default function ClientSingleQuestion({
               </RadioGroup>
             </FormControl>
           </>
+        )}
+        {question.questionType === "Checkbox" && (
+          <FormControl component="fieldset">
+            <FormGroup>
+              {question.options.map((option) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={state.option}
+                      onChange={handleCheckboxChange}
+                      name={option}
+                      color="primary"
+                    />
+                  }
+                  label={option}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
         )}
       </Paper>
     </>

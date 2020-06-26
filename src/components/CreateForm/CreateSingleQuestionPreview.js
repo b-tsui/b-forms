@@ -6,10 +6,17 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 export default function CreateSingleQuestionPreview({ question }) {
   const [value, setValue] = useState("");
-
+  const [state, setState] = useState({});
+  const handleCheckboxChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.checked });
+  };
   const handleChange = (e) => {
     setValue(e.target.value);
   };
@@ -22,12 +29,31 @@ export default function CreateSingleQuestionPreview({ question }) {
           <>
             <TextField
               autoComplete="off"
-              InputLabelProps={{ style: { color: "lightgray" } }}
+              InputLabelProps={{
+                style: { color: "lightgray" },
+              }}
               margin="dense"
               label="Enter Response..."
               type="text"
               fullWidth
               onChange={handleChange}
+            />
+          </>
+        )}
+        {question.questionType === "Paragraph" && (
+          <>
+            <TextField
+              autoComplete="off"
+              InputLabelProps={{ style: { color: "lightgray" } }}
+              margin="dense"
+              label="Enter Response..."
+              type="text"
+              fullWidth
+              required
+              value={value}
+              onChange={handleChange}
+              multiline
+              rows={5}
             />
           </>
         )}
@@ -51,6 +77,25 @@ export default function CreateSingleQuestionPreview({ question }) {
               </RadioGroup>
             </FormControl>
           </>
+        )}
+        {question.questionType === "Checkbox" && (
+          <FormControl component="fieldset">
+            <FormGroup>
+              {question.options.map((option) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={state.option}
+                      onChange={handleCheckboxChange}
+                      name={option}
+                      color="primary"
+                    />
+                  }
+                  label={option}
+                />
+              ))}
+            </FormGroup>
+          </FormControl>
         )}
       </Paper>
     </>

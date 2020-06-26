@@ -119,10 +119,12 @@ export default function CreateSingleQuestion({ question, refetch }) {
             <InputLabel>Question type</InputLabel>
             <Select native value={questionType} onChange={handleQuestionType}>
               <option value="Text">Text</option>
+              <option value="Paragraph">Multiline Text</option>
               <option value="MC">Multiple Choice</option>
+              <option value="Checkbox">Checkbox</option>
             </Select>
           </FormControl>
-          {questionOptions && questionType === "MC" && (
+          {(questionType === "MC" || questionType === "Checkbox") && (
             <>
               <div>Multiple Choice Options:</div>
               {questionOptions.map((option, i) => (
