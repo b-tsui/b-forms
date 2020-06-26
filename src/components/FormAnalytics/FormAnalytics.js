@@ -35,9 +35,15 @@ export default function FormAnalytics({ formId }) {
       <div>Analytics</div>
       <div className="data-analytics-container">
         {data.form.questions.map((question) => {
-          if (question.questionType === "MC") {
+          if (
+            question.questionType === "MC" ||
+            question.questionType === "Checkbox"
+          ) {
             return <FormAnalyticsMC question={question} />;
-          } else if (question.questionType === "Text") {
+          } else if (
+            question.questionType === "Text" ||
+            question.questionType === "Paragraph"
+          ) {
             return <FormAnalyticsText question={question} />;
           }
         })}

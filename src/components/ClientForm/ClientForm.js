@@ -52,7 +52,7 @@ export default function ClientForm({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    answers.forEach(async (answer) => {
+    await answers.forEach(async (answer) => {
       await addAnswer({
         variables: {
           input: answer,
