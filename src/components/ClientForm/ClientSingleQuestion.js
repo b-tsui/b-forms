@@ -44,11 +44,27 @@ export default function ClientSingleQuestion({
       setAnswers(newAnswers);
     }
   };
-  const updateAnswers = (e) => {};
+
   const handleCheckboxChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.checked });
     /*create array of answers, delete answers in current array matching qID, 
     set answers with current answers + new answers*/
+    let checkedAnswers = [];
+
+    //sets newAnswers to checked checkboxes
+    for (const [option, checked] of Object.entries({
+      ...state,
+      [e.target.name]: e.target.checked,
+    })) {
+      if (checked) {
+        checkedAnswers.push({ questionId: question.id, answer: option });
+      }
+    }
+    //clear old answers from answers
+    let filteredAnswers = answers.filter(
+      (answer) => answer.questionId !== question.id
+    );
+    setAnswers([...filteredAnswers, ...checkedAnswers]);
   };
 
   return (
