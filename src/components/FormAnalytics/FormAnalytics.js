@@ -1,23 +1,44 @@
 import React from "react";
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  HorizontalGridLines,
-  LineSeries,
-} from "react-vis";
-import { gql, useQuery, useMutation } from "@apollo/client";
 
-export default function FormAnalytics({ form }) {
+import { gql, useQuery } from "@apollo/client";
+import FormAnalyticsMC from "./FormAnalyticsMC";
+import FormAnalyticsText from "./FormAnalyticsText";
+import "../../styles/form-analytics.css";
+
+const GET_FORM_ANALYTICS = gql`
+  query GetFormAnalytics($id: ID!) {
+    form(id: $id) {
+      id
+      questions {
+        id
+        question
+        questionType
+        options
+        answers {
+          id
+          answer
+        }
+      }
+    }
+  }
+`;
+
+export default function FormAnalytics({ formId }) {
+  const { loading, error, data, refetch } = useQuery(GET_FORM_ANALYTICS, {
+    variables: { id: formId },
+  });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+
   return (
     <>
       <div>Analytics</div>
       <div className="data-analytics-container">
-        {form.questions.map((question) => {
+        {data.form.questions.map((question) => {
           if (question.questionType === "MC") {
-            return "mc question analytics";
+            return <FormAnalyticsMC question={question} />;
           } else if (question.questionType === "Text") {
-            return "text question analytics";
+            return <FormAnalyticsText question={question} />;
           }
         })}
       </div>

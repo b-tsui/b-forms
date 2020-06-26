@@ -1,0 +1,16 @@
+.rv-xy-plot__grid-lines__line {
+  stroke: gray;
+  stroke-width: 1;
+}
+
+.analytics-graph {
+  width: 90vw;
+}
+
+#text-analytics-page-buttons {
+  display: flex;
+}
+
+#text-analytics-page-container {
+  width: 90vw;
+}

@@ -157,7 +157,7 @@ export default function CreateFormPage({
           <CreateFormPreview form={data.form} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <FormAnalytics form={data.form} />
+          <FormAnalytics formId={formId} />
         </TabPanel>
       </div>
     </>
