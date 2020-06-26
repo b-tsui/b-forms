@@ -9,6 +9,7 @@
 
 #text-analytics-page-buttons {
   display: flex;
+  font-size: 10px;
 }
 
 #text-analytics-page-container {

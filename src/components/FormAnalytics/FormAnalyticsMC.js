@@ -49,6 +49,8 @@ export default function FormAnalyticsMC({ question }) {
           <XAxis
             style={{
               ticks: {
+                fontSize: "1em",
+                padding: "5px",
                 fontFamily: "sans-serif",
                 overflowWrap: "break-word",
               },
