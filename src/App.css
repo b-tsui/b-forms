@@ -1,9 +1,10 @@
-.App {
-  text-align: center;
+#App {
   font-family: "open sans", arial, sans-serif;
+  background: #f8f8ff;
+  min-height: 100vh;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -12,9 +13,9 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,9 +24,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -36,7 +37,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 a:-webkit-any-link {
   color: rgba(0, 0, 0, 0.87);

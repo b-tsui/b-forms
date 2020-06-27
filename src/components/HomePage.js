@@ -11,13 +11,15 @@ const HomePage = () => {
 
   return (
     <>
-      {loading && <Loading />}
-      {!loading && (
-        <>
-          {!user && <Splash />}
-          {user && <UserHome user={user} />}
-        </>
-      )}
+      <div style={{ paddingTop: "64px" }}>
+        {loading && <Loading />}
+        {!loading && (
+          <>
+            {!user && <Splash />}
+            {user && <UserHome user={user} />}
+          </>
+        )}
+      </div>
     </>
   );
 };

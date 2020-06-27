@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "./components/NavBar";
+import "./App.css";
 
 import PrivateRoute from "./components/PrivateRoute";
 import { Router, Route, Switch } from "react-router-dom";
@@ -12,7 +13,7 @@ import FormSubmitted from "./components/ClientForm/FormSubmitted";
 
 function App() {
   return (
-    <div className="App">
+    <div id="App">
       {/* Don't forget to include the history module */}
       <Router history={history}>
         <header>

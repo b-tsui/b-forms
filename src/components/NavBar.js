@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed" style={{ height: "64px" }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <div>
