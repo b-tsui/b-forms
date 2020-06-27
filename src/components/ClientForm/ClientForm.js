@@ -10,7 +10,9 @@ const GET_FORM = gql`
   query GetForm($id: ID!) {
     form(id: $id) {
       id
-      userId
+      user {
+        name
+      }
       title
       description
       questions {
@@ -69,7 +71,7 @@ export default function ClientForm({
           <div className="create-form-title">{data.form.title}</div>
           <div className="create-form-date">{`Created ${new Date(
             Number(data.form.createdAt)
-          ).toLocaleDateString("en-US")}`}</div>
+          ).toLocaleDateString("en-US")} by ${data.form.user.name}`}</div>
           <div className="create-form-description">{data.form.description}</div>
         </Paper>
         <div className="create-preview-form-container">

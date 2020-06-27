@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import CreateSingleQuestion from "./CreateSingleQuestion";
 import "../../styles/create-form.css";
@@ -19,7 +19,9 @@ const GET_FORM = gql`
   query GetForm($id: ID!) {
     form(id: $id) {
       id
-      userId
+      user {
+        name
+      }
       title
       description
       questions {
@@ -89,14 +91,22 @@ export default function CreateFormPage({
   });
   const [addQuestion] = useMutation(ADD_QUESTION);
   const [value, setValue] = useState(0); //for tab panel
+  const [allQuestions, setAllQuestions] = useState([]); //stores all questions to save
+  useEffect(() => {
+    if (!loading) {
+      setAllQuestions(data.form.questions);
+    }
+  }, [loading]);
   //for query loading
   if (loading) return null;
   if (error) return `Error! ${error}`;
 
   const handleAddQuestion = async (e) => {
-    await addQuestion({ variables: { input: { formId } } });
+    let newQuestion = await addQuestion({ variables: { input: { formId } } });
     //update cache with new question
+
     refetch();
+    setAllQuestions([...allQuestions, newQuestion.data.addQuestion]);
   };
 
   const handleChange = (event, newValue) => {
@@ -110,7 +120,7 @@ export default function CreateFormPage({
           <div className="create-form-title">{data.form.title}</div>
           <div className="create-form-date">{`Created ${new Date(
             Number(data.form.createdAt)
-          ).toLocaleDateString("en-US")}`}</div>
+          ).toLocaleDateString("en-US")} by ${data.form.user.name}`}</div>
           <div className="create-form-description">{data.form.description}</div>
           <CreateFormShareDialog formId={formId} />
         </Paper>
@@ -137,6 +147,8 @@ export default function CreateFormPage({
               <CreateSingleQuestion
                 question={question}
                 refetch={refetch}
+                allQuestions={allQuestions}
+                setAllQuestions={setAllQuestions}
                 key={question.id}
               />
             ))}
@@ -148,6 +160,14 @@ export default function CreateFormPage({
             <AddCircleIcon />
             &nbsp; Add Question
           </Button>
+          {/* <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddQuestion}
+          >
+            <AddCircleIcon />
+            &nbsp; Add Question
+          </Button> */}
         </TabPanel>
         <TabPanel
           value={value}

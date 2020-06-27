@@ -48,7 +48,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateSingleQuestion({ question, refetch }) {
+export default function CreateSingleQuestion({
+  question,
+  refetch,
+  allQuestions,
+  setAllQuestions,
+}) {
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const classes = useStyles();
@@ -56,12 +61,29 @@ export default function CreateSingleQuestion({ question, refetch }) {
   const [questionType, setQuestionType] = useState(question.questionType);
   const [questionOptions, setQuestionOptions] = useState(question.options);
 
+  let qIndex = allQuestions.findIndex((x) => x.id === question.id);
+
   const handleQuestionName = (e) => {
     setQuestionName(e.target.value);
+
+    //for save all questions
+    //creates a deep copy of all objects in the array
+    //As long as your objects contain JSON-serializable content
+    let qCopy = JSON.parse(JSON.stringify(allQuestions));
+    let objCopy = qCopy[qIndex];
+
+    objCopy.question = e.target.value;
+    console.log(objCopy.question);
+    setAllQuestions(qCopy);
   };
 
   const handleQuestionType = (e) => {
     setQuestionType(e.target.value);
+
+    //for save all questions
+    // const qCopy = [...allQuestions];
+    // qCopy[qIndex][questionType] = e.target.value;
+    // setAllQuestions(qCopy);
   };
 
   const handleQuestionDelete = async (e) => {
@@ -88,6 +110,11 @@ export default function CreateSingleQuestion({ question, refetch }) {
     let questionOptionsCopy = [...questionOptions];
     questionOptionsCopy[i] = e.target.value;
     setQuestionOptions(questionOptionsCopy);
+
+    //for save all questions
+    // const qCopy = [...allQuestions];
+    // qCopy[qIndex].options = questionOptionsCopy;
+    // setAllQuestions(qCopy);
   };
 
   const handleAddOption = async (e) => {
