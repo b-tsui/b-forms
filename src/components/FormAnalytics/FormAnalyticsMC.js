@@ -30,13 +30,11 @@ question: {
 export default function FormAnalyticsMC({ question }) {
   let answerCounts = {}; //creates answer count for each option
   let data = [];
-  let data2 = [];
   question.answers.forEach((answer) => {
     answerCounts[answer.answer] = (answerCounts[answer.answer] || 0) + 1;
   });
   for (let [option, count] of Object.entries(answerCounts)) {
-    data.push({ x: count, y: option });
-    data2.push({ x: option, y: count });
+    data.push({ x: option, y: count });
   }
 
   const CustomAxisLabel = (
@@ -78,30 +76,33 @@ export default function FormAnalyticsMC({ question }) {
       <div>
         <strong>{question.question}</strong>
       </div>
-      <div className="analytics-graph">
-        <FlexibleXYPlot
-          xType="ordinal"
-          margin={{ bottom: 100, left: 50 }}
-          // yDomain={chartDomain}
-        >
-          <XAxis
-            style={{
-              ticks: {
-                fontSize: "1em",
-                padding: "5px",
-                fontFamily: "sans-serif",
-                overflowWrap: "break-word",
-              },
-            }}
-          />
-          <YAxis tickFormat={(val) => (Math.round(val) === val ? val : "")} />
-          <CustomAxisLabel title={"# of reponses"} />
-          <CustomAxisLabel title={""} xAxis />
-          <HorizontalGridLines />
-          <VerticalGridLines />
-          <VerticalBarSeries data={data2} />
-        </FlexibleXYPlot>
-      </div>
+      {data.length === 0 && "no responses yet"}
+      {data.length > 0 && (
+        <div className="analytics-graph">
+          <FlexibleXYPlot
+            xType="ordinal"
+            margin={{ bottom: 100, left: 50 }}
+            // yDomain={chartDomain}
+          >
+            <XAxis
+              style={{
+                ticks: {
+                  fontSize: "1em",
+                  padding: "5px",
+                  fontFamily: "sans-serif",
+                  overflowWrap: "break-word",
+                },
+              }}
+            />
+            <YAxis tickFormat={(val) => (Math.round(val) === val ? val : "")} />
+            <CustomAxisLabel title={"# of reponses"} />
+            <CustomAxisLabel title={""} xAxis />
+            <HorizontalGridLines />
+            <VerticalGridLines />
+            <VerticalBarSeries data={data} />
+          </FlexibleXYPlot>
+        </div>
+      )}
     </>
   );
 }

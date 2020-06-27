@@ -173,7 +173,15 @@ export default function CreateFormPage({
             <Tab label="Analytics" {...a11yProps(2)} />
           </Tabs>
         </Paper>
-        <TabPanel value={value} index={0}>
+        <TabPanel
+          value={value}
+          index={0}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           {data.form.questions &&
             data.form.questions.map((question) => (
               <CreateSingleQuestion
@@ -184,11 +192,12 @@ export default function CreateFormPage({
                 key={question.id}
               />
             ))}
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex" }}>
             <Button
               variant="contained"
               color="primary"
               onClick={handleAddQuestion}
+              style={{ marginRight: "15px" }}
             >
               <AddCircleIcon />
               &nbsp; Add Question

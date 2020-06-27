@@ -6,6 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,18 +37,18 @@ const NavBar = () => {
           </Typography>
           <div>
             {!isAuthenticated && (
-              <button onClick={() => loginWithRedirect({})}>Log in</button>
+              <Button onClick={() => loginWithRedirect({})}>Log in</Button>
             )}
 
             {isAuthenticated && (
-              <button onClick={() => logout()}>Log out</button>
+              <Button onClick={() => logout()}>Log out</Button>
             )}
-            {isAuthenticated && (
+            {/* {isAuthenticated && (
               <span>
                 <Link to="/">Home</Link>&nbsp;
                 <Link to="/profile">Profile</Link>
               </span>
-            )}
+            )} */}
           </div>
         </Toolbar>
       </AppBar>

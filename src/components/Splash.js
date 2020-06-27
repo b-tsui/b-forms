@@ -1,6 +1,7 @@
 import React from "react";
 import { Parallax, Background } from "react-parallax";
 import "../styles/splash.css";
+import SplashSS from "./SplashSS";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -19,6 +20,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Splash = () => {
   const classes = useStyles();
+  const images = [
+    {
+      title: "Create Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS1.png",
+    },
+    {
+      title: "Share Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS5.png",
+    },
+    {
+      title: "Analyze Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS3.png",
+    },
+  ];
 
   return (
     <div>
@@ -30,7 +45,7 @@ const Splash = () => {
         strength={800}
       >
         <div
-          style={{ height: "calc(85vh - 64px)" }}
+          style={{ height: "calc(90vh - 64px)" }}
           className="splash-title-container"
         >
           <div className="splash-title-text">Create 🅱️etter Forms</div>
@@ -45,51 +60,39 @@ const Splash = () => {
           </Paper>
         </div>
       </Parallax>
-      <div className={classes.root} id="splash-paper-container">
-        <Paper elevation={3}>Create forms</Paper>
-        <Paper elevation={3}>Share forms</Paper>
-        <Paper elevation={3}>Analyze forms</Paper>
+      <div id="splash-paper-container">
+        <SplashSS image={images[0]} />
       </div>
-      {/* -----dynamic blur-----*/}
-      {/* <Background className="custom-bg">
-      <img src="http://www.fillmurray.com/500/320" alt="fill murray" />
-    </Background> */}
       <Parallax
         blur={8}
         bgImage={require("../images/Splash2.jpg")}
         bgImageAlt="the dog"
         strength={800}
       >
-        <div style={{ height: "calc(100vh - 64px)" }} />
+        <div style={{ height: "50vh" }} />
       </Parallax>
-
-      {/* -----custom background element-----*/}
-      {/* <Parallax strength={300}>
-      <div>Use the background component for custom elements</div>
-      <Background className="custom-bg">
-        <img src="http://www.fillmurray.com/500/320" alt="fill murray" />
-      </Background>
-    </Parallax> */}
-
-      {/* -----renderProp: "renderLayer"-----*/}
-      {/* <Parallax
-      bgImage={require("../images/splash1.jpeg")}
-      strength={400}
-      renderLayer={(percentage) => (
-        <div
-          style={{
-            position: "absolute",
-            background: `rgba(255, 125, 0, ${percentage * 1})`,
-            left: "50%",
-            top: "50%",
-            width: percentage * 500,
-            height: percentage * 500,
-          }}
-        />
-      )}
-    >
-      <p>... Content</p>
-    </Parallax> */}
+      <div id="splash-paper-container">
+        <SplashSS image={images[1]} />
+      </div>
+      <Parallax
+        blur={8}
+        bgImage={require("../images/Splash2.jpg")}
+        bgImageAlt="the dog"
+        strength={800}
+      >
+        <div style={{ height: "50vh" }} />
+      </Parallax>
+      <div id="splash-paper-container">
+        <SplashSS image={images[2]} style={{ height: 400 }} />
+      </div>
+      <Parallax
+        blur={8}
+        bgImage={require("../images/Splash2.jpg")}
+        bgImageAlt="the dog"
+        strength={800}
+      >
+        <div style={{ height: "50vh" }} />
+      </Parallax>
     </div>
   );
 };
