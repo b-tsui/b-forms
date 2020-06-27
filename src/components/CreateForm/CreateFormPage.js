@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
 import CreateSingleQuestion from "./CreateSingleQuestion";
+import CreateFormPreview from "./CreateFormPreview";
+import CreateFormShareDialog from "./CreateFormShareDialog";
+import FormAnalytics from "../FormAnalytics/FormAnalytics";
 import "../../styles/create-form.css";
 
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import CreateFormPreview from "./CreateFormPreview";
-import CreateFormShareDialog from "./CreateFormShareDialog";
-import FormAnalytics from "../FormAnalytics/FormAnalytics";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -39,6 +40,18 @@ const GET_FORM = gql`
 const ADD_QUESTION = gql`
   mutation AddQuestion($input: AddQuestionInput!) {
     addQuestion(input: $input) {
+      id
+      formId
+      question
+      questionType
+      options
+    }
+  }
+`;
+
+const UPDATE_QUESTION = gql`
+  mutation UpdateQuestion($input: UpdateQuestionInput!) {
+    updateQuestion(input: $input) {
       id
       formId
       question
@@ -92,6 +105,8 @@ export default function CreateFormPage({
   const [addQuestion] = useMutation(ADD_QUESTION);
   const [value, setValue] = useState(0); //for tab panel
   const [allQuestions, setAllQuestions] = useState([]); //stores all questions to save
+  const [updateQuestion] = useMutation(UPDATE_QUESTION);
+
   useEffect(() => {
     if (!loading) {
       setAllQuestions(data.form.questions);
@@ -111,6 +126,23 @@ export default function CreateFormPage({
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleSaveQuestions = async (e) => {
+    allQuestions.forEach(async (question) => {
+      await updateQuestion({
+        variables: {
+          input: {
+            id: question.id,
+            formId: question.formId,
+            question: question.question,
+            questionType: question.questionType,
+            options: question.options,
+          },
+        },
+      });
+      refetch();
+    });
   };
 
   return (
@@ -152,22 +184,24 @@ export default function CreateFormPage({
                 key={question.id}
               />
             ))}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddQuestion}
-          >
-            <AddCircleIcon />
-            &nbsp; Add Question
-          </Button>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddQuestion}
-          >
-            <AddCircleIcon />
-            &nbsp; Add Question
-          </Button> */}
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAddQuestion}
+            >
+              <AddCircleIcon />
+              &nbsp; Add Question
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSaveQuestions}
+            >
+              <SaveIcon />
+              &nbsp; Save All
+            </Button>
+          </div>
         </TabPanel>
         <TabPanel
           value={value}

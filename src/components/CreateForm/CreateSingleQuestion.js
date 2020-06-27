@@ -70,10 +70,7 @@ export default function CreateSingleQuestion({
     //creates a deep copy of all objects in the array
     //As long as your objects contain JSON-serializable content
     let qCopy = JSON.parse(JSON.stringify(allQuestions));
-    let objCopy = qCopy[qIndex];
-
-    objCopy.question = e.target.value;
-    console.log(objCopy.question);
+    qCopy[qIndex].question = e.target.value;
     setAllQuestions(qCopy);
   };
 
@@ -81,9 +78,11 @@ export default function CreateSingleQuestion({
     setQuestionType(e.target.value);
 
     //for save all questions
-    // const qCopy = [...allQuestions];
-    // qCopy[qIndex][questionType] = e.target.value;
-    // setAllQuestions(qCopy);
+    //creates a deep copy of all objects in the array
+    //As long as your objects contain JSON-serializable content
+    let qCopy = JSON.parse(JSON.stringify(allQuestions));
+    qCopy[qIndex].questionType = e.target.value;
+    setAllQuestions(qCopy);
   };
 
   const handleQuestionDelete = async (e) => {
@@ -112,9 +111,11 @@ export default function CreateSingleQuestion({
     setQuestionOptions(questionOptionsCopy);
 
     //for save all questions
-    // const qCopy = [...allQuestions];
-    // qCopy[qIndex].options = questionOptionsCopy;
-    // setAllQuestions(qCopy);
+    //creates a deep copy of all objects in the array
+    //As long as your objects contain JSON-serializable content
+    let qCopy = JSON.parse(JSON.stringify(allQuestions));
+    qCopy[qIndex].options = questionOptionsCopy;
+    setAllQuestions(qCopy);
   };
 
   const handleAddOption = async (e) => {
