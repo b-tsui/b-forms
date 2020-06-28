@@ -77,7 +77,6 @@ export default function CreateFormModal() {
           },
         },
       });
-      console.log(res);
       window.location.href = `/form/create/${res.data.addForm.id}`;
     }
   };

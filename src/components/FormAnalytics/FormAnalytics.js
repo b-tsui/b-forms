@@ -1,7 +1,7 @@
 import React from "react";
 
 import { gql, useQuery } from "@apollo/client";
-import FormAnalyticsMC from "./FormAnalyticsMC";
+//import FormAnalyticsMC from "./FormAnalyticsMC";
 import FormAnalyticsMCrecharts from "./FormAnalyticsMCrecharts";
 import FormAnalyticsText from "./FormAnalyticsText";
 import "../../styles/form-analytics.css";

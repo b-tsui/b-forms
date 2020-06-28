@@ -11,10 +11,7 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Sector,
 } from "recharts";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -67,6 +64,8 @@ export default function FormAnalyticsMCrecharts({ question }) {
   let answerCounts = {}; //creates answer count for each option
   let data = [];
   let data1 = [];
+
+  //format data for recharts
   question.answers.forEach((answer) => {
     answerCounts[answer.answer] = (answerCounts[answer.answer] || 0) + 1;
   });
@@ -74,6 +73,8 @@ export default function FormAnalyticsMCrecharts({ question }) {
     data.push({ name: option, count: count });
     data1.push({ name: option, value: count });
   }
+
+  //handle switch state
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
@@ -81,23 +82,26 @@ export default function FormAnalyticsMCrecharts({ question }) {
   return (
     <>
       <div className="form-analytics-text-title">{question.question}</div>
-      <div>
-        <Typography component="div">
-          <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>Bar Chart</Grid>
-            <Grid item>
-              <Switch
-                checked={state.checked}
-                onChange={handleChange}
-                name="checked"
-                color="primary"
-              />
-            </Grid>
-            <Grid item>Pie Chart</Grid>
-          </Grid>
-        </Typography>
-      </div>
+
       {data.length === 0 && "no responses yet"}
+      {data.length > 0 && (
+        <div>
+          <Typography component="div">
+            <Grid component="label" container alignItems="center" spacing={1}>
+              <Grid item>Bar Chart</Grid>
+              <Grid item>
+                <Switch
+                  checked={state.checked}
+                  onChange={handleChange}
+                  name="checked"
+                  color="primary"
+                />
+              </Grid>
+              <Grid item>Pie Chart</Grid>
+            </Grid>
+          </Typography>
+        </div>
+      )}
       {data.length > 0 && !state.checked && (
         <div className="analytics-graph">
           <ResponsiveContainer>

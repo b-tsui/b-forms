@@ -19,6 +19,7 @@
     "react-scripts": "3.4.1",
     "react-share": "^4.2.0",
     "react-vis": "^1.11.7",
+    "react-wordcloud": "^1.2.3",
     "recharts": "^1.8.5"
   },
   "scripts": {

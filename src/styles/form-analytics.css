@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .analytics-graph {
@@ -24,9 +25,10 @@
   font-size: 10px;
 }
 
-#text-analytics-page-container {
+div.text-analytics-page-container {
   width: 60vw;
   min-width: 350px;
+  min-height: 40vh;
 }
 
 .rv-xy-plot__axis__tick-text {

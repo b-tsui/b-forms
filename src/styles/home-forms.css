@@ -20,6 +20,7 @@ div.MuiCardHeader-root {
   overflow: hidden;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-right: 26px;
   height: 30px;
   color: #626262;
 }
