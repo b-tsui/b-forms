@@ -141,6 +141,7 @@ export default function FormAnalyticsMCrecharts({ question }) {
                   <Cell fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
+              <Legend />
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>

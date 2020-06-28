@@ -9,6 +9,8 @@ export default function FormAnalyticsWordCloud({ answers }) {
     const isActive = callbackName !== "onWordMouseOut";
     const element = event.target;
     const text = select(element);
+    const originalSize = text.attr("font-size").slice();
+
     text
       .on("click", () => {
         if (isActive) {
@@ -17,7 +19,7 @@ export default function FormAnalyticsWordCloud({ answers }) {
       })
       .transition()
       .attr("background", "white")
-      .attr("font-size", isActive ? "300%" : "100%")
+      .attr("font-size", isActive ? originalSize : originalSize)
       .attr("text-decoration", isActive ? "underline" : "none");
   };
 
@@ -45,7 +47,7 @@ export default function FormAnalyticsWordCloud({ answers }) {
         onWordMouseOver: getCallback("onWordMouseOver"),
       }}
       options={{
-        fontSizes: [25, 50],
+        fontSizes: [25, 64],
       }}
       words={cloudWords}
     />
