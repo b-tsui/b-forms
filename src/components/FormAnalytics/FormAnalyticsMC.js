@@ -11,6 +11,8 @@ import {
   makeWidthFlexible,
   HorizontalBarSeries,
   FlexibleXYPlot,
+  makeVisFlexible,
+  RadialChart,
 } from "react-vis";
 import { gql, useQuery, useMutation } from "@apollo/client";
 
@@ -30,12 +32,16 @@ question: {
 export default function FormAnalyticsMC({ question }) {
   let answerCounts = {}; //creates answer count for each option
   let data = [];
+  let radData = [];
   question.answers.forEach((answer) => {
     answerCounts[answer.answer] = (answerCounts[answer.answer] || 0) + 1;
   });
   for (let [option, count] of Object.entries(answerCounts)) {
     data.push({ x: option, y: count });
+    radData.push({ angle: count, label: option });
   }
+
+  const FlexRadialChart = makeVisFlexible(RadialChart);
 
   const CustomAxisLabel = (
     props /*: {
@@ -55,7 +61,7 @@ export default function FormAnalyticsMC({ question }) {
 
     const xLabelOffset = {
       x: props.innerWidth / 2,
-      y: 1.15 * props.innerHeight, // 1.2 was enough for me to get it below x axis. you may need a diff't #
+      y: 1.15 * props.innerHeight, // 1.15 was enough for me to get it below x axis. you may need a diff't #
     };
     const transform = props.xAxis
       ? `translate(${xLabelOffset.x}, ${xLabelOffset.y})`
@@ -67,23 +73,16 @@ export default function FormAnalyticsMC({ question }) {
       </g>
     );
   };
-
   CustomAxisLabel.displayName = "CustomAxisLabel";
   CustomAxisLabel.requiresSVG = true;
 
   return (
     <>
-      <div>
-        <strong>{question.question}</strong>
-      </div>
+      <div className="form-analytics-text-title">{question.question}</div>
       {data.length === 0 && "no responses yet"}
       {data.length > 0 && (
         <div className="analytics-graph">
-          <FlexibleXYPlot
-            xType="ordinal"
-            margin={{ bottom: 100, left: 50 }}
-            // yDomain={chartDomain}
-          >
+          <FlexibleXYPlot xType="ordinal" margin={{ bottom: 100, left: 50 }}>
             <XAxis
               style={{
                 ticks: {
@@ -101,6 +100,12 @@ export default function FormAnalyticsMC({ question }) {
             <VerticalGridLines />
             <VerticalBarSeries data={data} />
           </FlexibleXYPlot>
+          {/* 
+          <FlexRadialChart
+            margin={{ bottom: 100, left: 50 }}
+            data={radData}
+            showLabels
+          ></FlexRadialChart> */}
         </div>
       )}
     </>

@@ -25,9 +25,22 @@
 }
 
 #text-analytics-page-container {
-  width: 90vw;
+  width: 60vw;
+  min-width: 350px;
 }
 
 .rv-xy-plot__axis__tick-text {
   margin-left: 50px;
+}
+
+.form-analytics-text-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.form-analytics-text-title {
+  font-size: 1.2em;
+  text-align: center;
+  padding-bottom: 10px;
+  font-weight: bold;
 }

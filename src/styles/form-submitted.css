@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 64px;
   padding: 25px;
 }
 
@@ -19,4 +20,10 @@
   font-family: "open sans", arial, sans-serif;
   font-size: 1.8em;
   padding-bottom: 25px;
+}
+
+.thank-you-signup-text {
+  font-family: "open sans", arial, sans-serif;
+  font-size: 1em;
+  padding: 25px;
 }

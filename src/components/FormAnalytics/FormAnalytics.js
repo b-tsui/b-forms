@@ -2,6 +2,7 @@ import React from "react";
 
 import { gql, useQuery } from "@apollo/client";
 import FormAnalyticsMC from "./FormAnalyticsMC";
+import FormAnalyticsMCrecharts from "./FormAnalyticsMCrecharts";
 import FormAnalyticsText from "./FormAnalyticsText";
 import "../../styles/form-analytics.css";
 
@@ -32,14 +33,13 @@ export default function FormAnalytics({ formId }) {
 
   return (
     <>
-      <div>Analytics</div>
       <div className="data-analytics-container">
         {data.form.questions.map((question) => {
           if (
             question.questionType === "MC" ||
             question.questionType === "Checkbox"
           ) {
-            return <FormAnalyticsMC question={question} />;
+            return <FormAnalyticsMCrecharts question={question} />;
           } else if (
             question.questionType === "Text" ||
             question.questionType === "Paragraph"

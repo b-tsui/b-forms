@@ -17,7 +17,8 @@
     "react-parallax": "^3.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-vis": "^1.11.7"
+    "react-vis": "^1.11.7",
+    "recharts": "^1.8.5"
   },
   "scripts": {
     "start": "react-scripts start",

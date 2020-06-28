@@ -45,7 +45,7 @@ const Splash = () => {
         strength={800}
       >
         <div
-          style={{ height: "calc(90vh - 64px)" }}
+          style={{ height: "calc(90vh - 64px)" , marginTop: "64px"}}
           className="splash-title-container"
         >
           <div className="splash-title-text">Create 🅱️etter Forms</div>
