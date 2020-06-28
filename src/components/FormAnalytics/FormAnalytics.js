@@ -25,7 +25,7 @@ const GET_FORM_ANALYTICS = gql`
 `;
 
 export default function FormAnalytics({ formId }) {
-  const { loading, error, data, refetch } = useQuery(GET_FORM_ANALYTICS, {
+  const { loading, error, data } = useQuery(GET_FORM_ANALYTICS, {
     variables: { id: formId },
   });
   if (loading) return null;

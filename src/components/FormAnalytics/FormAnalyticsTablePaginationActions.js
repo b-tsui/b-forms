@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -12,12 +12,6 @@ const useStyles1 = makeStyles((theme) => ({
     marginLeft: theme.spacing(2.5),
   },
 }));
-
-const useStyles2 = makeStyles({
-  table: {
-    minWidth: 300,
-  },
-});
 
 export default function TablePaginationActions(props) {
   const classes = useStyles1();

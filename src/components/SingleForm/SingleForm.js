@@ -14,7 +14,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import SingleFormDeleteDialog from "./SingleFormDeleteDialog";
-import ReceiptIcon from "@material-ui/icons/Receipt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles((theme) => ({

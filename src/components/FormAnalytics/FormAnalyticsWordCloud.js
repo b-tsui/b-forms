@@ -44,6 +44,9 @@ export default function FormAnalyticsWordCloud({ answers }) {
         onWordMouseOut: getCallback("onWordMouseOut"),
         onWordMouseOver: getCallback("onWordMouseOver"),
       }}
+      options={{
+        fontSizes: [25, 50],
+      }}
       words={cloudWords}
     />
   );

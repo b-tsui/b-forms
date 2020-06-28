@@ -34,13 +34,15 @@ export default function FormAnalyticsText({ question }) {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  let answers = [];
 
   //for switching between table/cloud
   const [state, setState] = useState({
     checked: false,
   });
-  question.answers.forEach((answer) => {
+
+  let answers = [];
+
+  question.answers.forEach((answer, i) => {
     answers.push(answer.answer);
   });
 
@@ -108,8 +110,8 @@ export default function FormAnalyticsText({ question }) {
                       page * rowsPerPage + rowsPerPage
                     )
                   : rows
-                ).map((row) => (
-                  <TableRow key={row}>
+                ).map((row, i) => (
+                  <TableRow key={i}>
                     <TableCell component="th" scope="row">
                       {row}
                     </TableCell>
