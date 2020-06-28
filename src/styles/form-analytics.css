@@ -25,10 +25,14 @@
   font-size: 10px;
 }
 
-div.text-analytics-page-container {
+div.text-analytics-cloud-container {
   width: 60vw;
   min-width: 350px;
   min-height: 40vh;
+}
+div.text-analytics-table-container {
+  width: 60vw;
+  min-width: 350px;
 }
 
 .rv-xy-plot__axis__tick-text {

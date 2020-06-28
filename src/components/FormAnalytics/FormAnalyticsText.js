@@ -89,7 +89,7 @@ export default function FormAnalyticsText({ question }) {
           </div>
         )}
         {answers.length > 0 && state.checked && (
-          <div className="text-analytics-page-container">
+          <div className="text-analytics-cloud-container">
             <FormAnalyticsWordCloud answers={answers} />
             {/*  /> */}
           </div>
@@ -97,7 +97,7 @@ export default function FormAnalyticsText({ question }) {
         {answers.length > 0 && !state.checked && (
           <TableContainer
             component={Paper}
-            className="text-analytics-page-container"
+            className="text-analytics-table-container"
           >
             <Table
               className={classes.table}
