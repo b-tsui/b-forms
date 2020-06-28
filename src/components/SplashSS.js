@@ -7,6 +7,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 const useStyles = makeStyles({
   root: {
     width: 345,
+    minWidth: 345,
   },
   media: {
     height: 500,
@@ -17,18 +18,20 @@ export default function SplashSS({ image }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardContent
-        className="splash-ss-title"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        {image.title}
-      </CardContent>
-      <CardMedia
-        className={classes.media}
-        image={image.src}
-        title="bform screenshots"
-      />
-    </Card>
+    <div className="splash-ss-container">
+      <Card className={classes.root}>
+        <CardContent
+          className="splash-ss-title"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          {image.title}
+        </CardContent>
+        <CardMedia
+          className={classes.media}
+          image={image.src}
+          title="bform screenshots"
+        />
+      </Card>
+    </div>
   );
 }

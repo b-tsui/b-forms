@@ -13,11 +13,23 @@ const Splash = () => {
     },
     {
       title: "Share Forms",
-      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS5.png",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS2.png",
     },
     {
       title: "Analyze Forms",
       src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS3.png",
+    },
+    {
+      title: "Analyze Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS4.png",
+    },
+    {
+      title: "Analyze Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS5.png",
+    },
+    {
+      title: "Analyze Forms",
+      src: "https://clackurbucket.s3.us-east-2.amazonaws.com/bformsSS6.png",
     },
   ];
 
@@ -48,16 +60,6 @@ const Splash = () => {
       </Parallax>
       <div id="splash-paper-container">
         <SplashSS image={images[0]} />
-      </div>
-      <Parallax
-        blur={8}
-        bgImage={require("../images/Splash2.jpg")}
-        bgImageAlt="the dog"
-        strength={800}
-      >
-        <div style={{ height: "50vh" }} />
-      </Parallax>
-      <div id="splash-paper-container">
         <SplashSS image={images[1]} />
       </div>
       <Parallax
@@ -68,8 +70,22 @@ const Splash = () => {
       >
         <div style={{ height: "50vh" }} />
       </Parallax>
+      {/* <div id="splash-paper-container">
+        <SplashSS image={images[1]} />
+      </div>
+      <Parallax
+        blur={8}
+        bgImage={require("../images/Splash2.jpg")}
+        bgImageAlt="the dog"
+        strength={800}
+      >
+        <div style={{ height: "50vh" }} />
+      </Parallax> */}
       <div id="splash-paper-container">
         <SplashSS image={images[2]} style={{ height: 400 }} />
+        <SplashSS image={images[3]} style={{ height: 400 }} />
+        <SplashSS image={images[4]} style={{ height: 400 }} />
+        <SplashSS image={images[5]} style={{ height: 400 }} />
       </div>
       <Parallax
         blur={8}

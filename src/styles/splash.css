@@ -28,5 +28,11 @@ div.splash-title {
 #splash-paper-container {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   padding: 25px;
+}
+
+.splash-ss-container {
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
