@@ -12,6 +12,7 @@ const GET_USER_FORMS = gql`
       title
       description
       createdAt
+      answerCount
     }
   }
 `;

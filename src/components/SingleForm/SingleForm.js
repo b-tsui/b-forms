@@ -14,6 +14,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import SingleFormDeleteDialog from "./SingleFormDeleteDialog";
+import ReceiptIcon from "@material-ui/icons/Receipt";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +76,7 @@ export default function SingleForm({ form, refetch }) {
             <CardMedia
               className={classes.media}
               image="https://clackurbucket.s3.us-east-2.amazonaws.com/default-form.png"
-              title="Contemplative Reptile"
+              title="Form"
             />
             <CardHeader
               title={<div className="single-form-title">{form.title}</div>}
@@ -85,9 +87,14 @@ export default function SingleForm({ form, refetch }) {
                       Number(form.createdAt)
                     ).toLocaleDateString("en-US")}`}
                   </div>
+                  <div className="single-form-answerCount">
+                    <PersonAddIcon fontSize="small" />
+                    <div>{form.answerCount}</div>
+                  </div>
                 </div>
               }
             />
+
             <CardContent id={"single-form-description"}>
               <Typography variant="body2" component="p">
                 {form.description}

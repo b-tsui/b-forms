@@ -9,6 +9,17 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import "../../styles/create-form.css";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+  EmailIcon,
+  FacebookIcon,
+  LinkedinIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
 
 const styles = (theme) => ({
   root: {
@@ -74,7 +85,7 @@ export default function CreateFormShareDialog({ formId }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const shareUrl = `${window.location.origin}/form/respond/${formId}`;
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -99,6 +110,18 @@ export default function CreateFormShareDialog({ formId }) {
           />
         </DialogContent>
         <DialogActions>
+          <LinkedinShareButton url={shareUrl}>
+            <LinkedinIcon size={32} />
+          </LinkedinShareButton>
+          <EmailShareButton url={shareUrl}>
+            <EmailIcon size={32} />
+          </EmailShareButton>
+          <WhatsappShareButton url={shareUrl}>
+            <WhatsappIcon size={32} />
+          </WhatsappShareButton>
+          <FacebookShareButton url={shareUrl}>
+            <FacebookIcon size={32} />
+          </FacebookShareButton>
           <Button autoFocus onClick={copyToClipboard} color="primary">
             Copy to Clipboard
           </Button>
