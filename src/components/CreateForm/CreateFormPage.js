@@ -247,6 +247,7 @@ export default function CreateFormPage({
                 allQuestions={allQuestions}
                 setAllQuestions={setAllQuestions}
                 key={question.id}
+                numQuestions={data.form.questions.length}
               />
             ))}
           <div style={{ display: "flex" }}>

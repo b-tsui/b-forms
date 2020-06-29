@@ -3,7 +3,7 @@ import { useMutation, useQuery, gql } from "@apollo/client";
 import Loading from "./Loading";
 import { Typography } from "@material-ui/core";
 import SingleForm from "./SingleForm/SingleForm";
-import CreateFormModal from "./CreateForm/CreateFormModal";
+//import CreateFormModal from "./CreateForm/CreateFormModal";
 import Button from "@material-ui/core/Button";
 
 const GET_USER_FORMS = gql`

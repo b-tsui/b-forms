@@ -53,6 +53,7 @@ export default function CreateSingleQuestion({
   refetch,
   allQuestions,
   setAllQuestions,
+  numQuestions,
 }) {
   const [deleteQuestion] = useMutation(DELETE_QUESTION);
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
@@ -86,6 +87,10 @@ export default function CreateSingleQuestion({
   };
 
   const handleQuestionDelete = async (e) => {
+    if (numQuestions < 2) {
+      alert("Error! You must have at least 1 question!");
+      return;
+    }
     await deleteQuestion({ variables: { input: { id: question.id } } });
     refetch();
   };
