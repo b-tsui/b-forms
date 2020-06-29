@@ -63,7 +63,6 @@ export const Auth0Provider = ({
         });
         const { data } = await res.json();
         //adds db userId to auth0 user context
-        console.log(data);
         setUser({ ...user, userId: data.addUser.id });
       }
 

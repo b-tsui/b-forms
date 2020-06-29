@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core";
 import SingleForm from "./SingleForm/SingleForm";
 //import CreateFormModal from "./CreateForm/CreateFormModal";
 import Button from "@material-ui/core/Button";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 const GET_USER_FORMS = gql`
   query UserForms($userId: ID!) {
@@ -69,9 +70,12 @@ const UserHome = ({ user }) => {
               variant="contained"
               color="primary"
               onClick={handleAddForm}
-              style={{ height: 250, width: 200, top: 15 }}
+              style={{ height: 250, width: 200, top: 5, margin: 10 }}
             >
-              Add Form
+              <div>
+                <AddBoxIcon fontSize="large" />
+                <div>Add Form</div>
+              </div>
             </Button>
             {data.userForms.map((form) => (
               <SingleForm form={form} refetch={refetch} key={form.id} />
