@@ -22,6 +22,26 @@
   font-size: 2.2em;
   font-weight: bold;
   padding: 5px;
+  min-width: 300px;
+  width: 100%;
+  overflow: auto;
+  text-align: center;
+}
+.create-form-title-input {
+  width: 100%;
+  font-size: 1.2em;
+  text-align: Center;
+  border: 0;
+  padding: 0;
+}
+
+.create-form-desc-input {
+  font-family: "open sans", arial, sans-serif;
+  font-size: 0.8em;
+  width: 100%;
+  text-align: Center;
+  border: 0;
+  padding: 0;
 }
 
 .create-form-date {
@@ -32,6 +52,8 @@
   padding: 10px;
   font-size: 1.2em;
   text-align: center;
+  width: 100%;
+  overflow: auto;
 }
 
 .create-question-container {

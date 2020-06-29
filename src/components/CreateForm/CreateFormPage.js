@@ -15,6 +15,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
 
 const GET_FORM = gql`
   query GetForm($id: ID!) {
@@ -106,10 +107,14 @@ export default function CreateFormPage({
   const [value, setValue] = useState(0); //for tab panel
   const [allQuestions, setAllQuestions] = useState([]); //stores all questions to save
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
+  const [formName, setFormName] = useState("");
+  const [formDesc, setFormDesc] = useState("");
 
   useEffect(() => {
     if (!loading) {
       setAllQuestions(data.form.questions);
+      setFormName(data.form.title);
+      setFormDesc(data.form.description);
     }
   }, [loading]);
   //for query loading
@@ -126,6 +131,14 @@ export default function CreateFormPage({
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleFormName = async (e) => {
+    setFormName(e.target.value);
+  };
+
+  const handleFormDesc = async (e) => {
+    setFormDesc(e.target.value);
   };
 
   const handleSaveQuestions = async (e) => {
@@ -149,11 +162,25 @@ export default function CreateFormPage({
     <>
       <div className="create-form-container">
         <Paper elevation={3} className="create-form-header">
-          <div className="create-form-title">{data.form.title}</div>
+          <div className="create-form-title">
+            <input
+              type="text"
+              value={formName}
+              onChange={handleFormName}
+              className="create-form-title-input"
+            />
+          </div>
           <div className="create-form-date">{`Created ${new Date(
             Number(data.form.createdAt)
           ).toLocaleDateString("en-US")} by ${data.form.user.name}`}</div>
-          <div className="create-form-description">{data.form.description}</div>
+          <div className="create-form-description">
+            <textarea
+              type="text"
+              value={formDesc}
+              onChange={handleFormDesc}
+              className="create-form-desc-input"
+            />
+          </div>
           <CreateFormShareDialog formId={formId} />
         </Paper>
         <Paper square className="create-form-tabs-container">
