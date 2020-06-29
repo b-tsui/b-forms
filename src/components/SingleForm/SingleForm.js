@@ -39,7 +39,7 @@ export default function SingleForm({ form, refetch }) {
   };
   return (
     <>
-      <div className="everything">
+      <div style={{ margin: "5px" }}>
         <Card className={classes.root} id="single-form">
           <div id="single-form-options">
             <IconButton

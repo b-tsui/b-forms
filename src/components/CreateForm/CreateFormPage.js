@@ -50,6 +50,16 @@ const ADD_QUESTION = gql`
   }
 `;
 
+const UPDATE_FORM = gql`
+  mutation UpdateForm($input: UpdateFormInput!) {
+    updateForm(input: $input) {
+      id
+      title
+      description
+    }
+  }
+`;
+
 const UPDATE_QUESTION = gql`
   mutation UpdateQuestion($input: UpdateQuestionInput!) {
     updateQuestion(input: $input) {
@@ -106,6 +116,7 @@ export default function CreateFormPage({
   const [addQuestion] = useMutation(ADD_QUESTION);
   const [value, setValue] = useState(0); //for tab panel
   const [allQuestions, setAllQuestions] = useState([]); //stores all questions to save
+  const [updateForm] = useMutation(UPDATE_FORM);
   const [updateQuestion] = useMutation(UPDATE_QUESTION);
   const [formName, setFormName] = useState("");
   const [formDesc, setFormDesc] = useState("");
@@ -156,6 +167,15 @@ export default function CreateFormPage({
       });
       refetch();
     });
+    await updateForm({
+      variables: {
+        input: {
+          id: formId,
+          title: formName,
+          description: formDesc,
+        },
+      },
+    });
   };
 
   return (
@@ -181,7 +201,17 @@ export default function CreateFormPage({
               className="create-form-desc-input"
             />
           </div>
-          <CreateFormShareDialog formId={formId} />
+          <div className="create-form-header-buttons">
+            <CreateFormShareDialog formId={formId} />
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSaveQuestions}
+              style={{ marginLeft: "25px" }}
+            >
+              <SaveIcon />
+            </Button>
+          </div>
         </Paper>
         <Paper square className="create-form-tabs-container">
           <Tabs

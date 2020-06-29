@@ -1,10 +1,17 @@
-.sets-container {
+.user-home-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: space-around;
   min-height: calc(100vh - 300px);
 }
+
+.user-forms-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: start;
+}
+
 .home-welcome {
   display: flex;
   justify-content: center;

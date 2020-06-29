@@ -56,6 +56,13 @@
   overflow: auto;
 }
 
+.create-form-header-buttons {
+  width: 80%;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
 .create-question-container {
   display: flex;
   flex-direction: column;

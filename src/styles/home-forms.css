@@ -83,10 +83,6 @@ div.single-form-delete-dialogue-buttons {
   align-items: center;
 }
 
-.everything {
-  display: flex;
-}
-
 .MuiMenu-list {
   /* width: 80px; */
   justify-content: center;
