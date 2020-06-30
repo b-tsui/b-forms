@@ -47,7 +47,7 @@ const Splash = () => {
           className="splash-title-container"
         >
           <div className="splash-title-text">Create 🅱️etter Forms</div>
-          <Paper elevation={3} className="splash-title">
+          {/* <Paper elevation={3} className="splash-title">
             <div>
               Get started creating better forms by signing up or login in!
             </div>
@@ -55,7 +55,7 @@ const Splash = () => {
               To demo, login with the email: demo@demo.com and password:
               aA1!demo
             </div>
-          </Paper>
+          </Paper> */}
         </div>
       </Parallax>
       <div id="splash-paper-container">

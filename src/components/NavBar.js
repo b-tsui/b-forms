@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = () => {
   const classes = useStyles();
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithPopup, logout } = useAuth0();
 
   return (
     <div className={classes.root}>
@@ -37,7 +37,7 @@ const NavBar = () => {
           </Typography>
           <div>
             {!isAuthenticated && (
-              <Button onClick={() => loginWithRedirect({})}>Log in</Button>
+              <Button onClick={() => loginWithPopup({})}>Log in</Button>
             )}
 
             {isAuthenticated && (
