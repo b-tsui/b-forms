@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
 const GET_USER_FORMS = gql`
-  query UserForms($userId: ID!) {
-    userForms(userId: $userId) {
+  query UserForms($userEmail: String!) {
+    userForms(userEmail: $userEmail) {
       id
       title
       description
@@ -34,7 +34,7 @@ const UserHome = ({ user }) => {
   const { loading: gqlLoading, error, data, refetch } = useQuery(
     GET_USER_FORMS,
     {
-      variables: { userId: user.userId },
+      variables: { userEmail: user.email },
     }
   );
   const [addForm] = useMutation(ADD_FORM);
@@ -48,6 +48,7 @@ const UserHome = ({ user }) => {
         variables: {
           input: {
             userId: user.userId,
+            userEmail: user.email,
           },
         },
       });
