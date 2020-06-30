@@ -30,14 +30,19 @@ const NavBar = () => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <div>
-              <a href="/" id="navbar-logo">
-                b-forms
+              <a href="/" id="navbar-logo" style={{ color: "#f8f8ff" }}>
+                🅱️-forms
               </a>
             </div>
           </Typography>
           <div>
             {!isAuthenticated && (
-              <Button onClick={() => loginWithPopup({})}>Log in</Button>
+              <Button
+                onClick={() => loginWithPopup({})}
+                style={{ color: "#f8f8ff" }}
+              >
+                Log in / Demo
+              </Button>
             )}
 
             {isAuthenticated && (
