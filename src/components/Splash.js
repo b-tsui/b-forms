@@ -2,10 +2,14 @@ import React from "react";
 import { Parallax } from "react-parallax";
 import "../styles/splash.css";
 import SplashSS from "./SplashSS";
+import { useAuth0 } from "../react-auth0-spa";
 
 import Paper from "@material-ui/core/Paper";
+import { Button } from "@material-ui/core";
 
 const Splash = () => {
+  const { loginWithPopup } = useAuth0();
+
   const images = [
     {
       title: "Create Forms",
@@ -47,15 +51,14 @@ const Splash = () => {
           className="splash-title-container"
         >
           <div className="splash-title-text">Create 🅱️etter Forms</div>
-          {/* <Paper elevation={3} className="splash-title">
-            <div>
-              Get started creating better forms by signing up or login in!
-            </div>
-            <div>
-              To demo, login with the email: demo@demo.com and password:
-              aA1!demo
-            </div>
-          </Paper> */}
+          <Button
+            onClick={() => loginWithPopup({})}
+            variant="contained"
+            color="primary"
+            style={{ padding: "20px", fontSize: "1.3em", fontWeight: "bold" }}
+          >
+            Log in / Demo
+          </Button>
         </div>
       </Parallax>
       <div id="splash-paper-container">
