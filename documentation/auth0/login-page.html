@@ -190,7 +190,40 @@
         }
         function displayError(err) {
           var errorMessage = document.getElementById("error-message");
-          errorMessage.innerHTML = err.description;
+          var errorRules = [
+            { message: "At least 8 characters in length" },
+            {
+              message:
+                "Contain at least 3 of the following 4 types of characters:",
+            },
+          ];
+          var errorTypes = [
+            { message: "lower case letters (a-z)" },
+            { message: "upper case letters (A-Z)" },
+            { message: "special characters (e.g. !@#$%^&*)" },
+            { message: "numbers (i.e. 0-9)" },
+          ];
+          var errorHTML;
+          if (err.code === "invalid_password") {
+            errorHTML =
+              "<ul>" +
+              errorRules
+                .map((rule) => {
+                  return `<li>${rule.message}</li>`;
+                })
+                .join("") +
+              "<ul>" +
+              errorTypes
+                .map((type) => {
+                  return `<li>${type.message}</li>`;
+                })
+                .join("") +
+              "</ul>" +
+              "</ul>";
+          } else {
+            errorHTML = err.description;
+          }
+          errorMessage.innerHTML = errorHTML;
           errorMessage.style.display = "block";
         }
         document.getElementById("btn-login").addEventListener("click", login);
