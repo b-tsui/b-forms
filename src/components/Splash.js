@@ -4,7 +4,6 @@ import "../styles/splash.css";
 import SplashSS from "./SplashSS";
 import { useAuth0 } from "../react-auth0-spa";
 
-import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 
 const Splash = () => {

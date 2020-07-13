@@ -17,7 +17,6 @@ import {
   EmailIcon,
   FacebookIcon,
   LinkedinIcon,
-  TwitterIcon,
   WhatsappIcon,
 } from "react-share";
 
