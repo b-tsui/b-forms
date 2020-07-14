@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "../react-auth0-spa";
 
 import Splash from "./Splash";
@@ -7,7 +7,13 @@ import UserHome from "./UserHome";
 import "../styles/home-page.css";
 
 const HomePage = () => {
-  const { user, loading } = useAuth0();
+  const { user, loading, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    if (user && !isAuthenticated) {
+      window.location.reload();
+    }
+  }, [user]);
 
   return (
     <>
@@ -16,7 +22,7 @@ const HomePage = () => {
         {!loading && (
           <>
             {!user && <Splash />}
-            {user && <UserHome user={user} />}
+            {user && <UserHome user={user} isAuthenticated={isAuthenticated} />}
           </>
         )}
       </div>

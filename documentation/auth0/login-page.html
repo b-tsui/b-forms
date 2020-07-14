@@ -171,6 +171,7 @@
             {
               connection: databaseConnection,
               email: email,
+              username: email,
               password: password,
             },
             function (err) {
@@ -226,6 +227,7 @@
           errorMessage.innerHTML = errorHTML;
           errorMessage.style.display = "block";
         }
+
         document.getElementById("btn-login").addEventListener("click", login);
         document
           .getElementById("btn-google")
