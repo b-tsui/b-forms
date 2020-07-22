@@ -221,7 +221,7 @@ export default function CreateFormPage({
             aria-label="disabled tabs example"
           >
             <Tab
-              inkBarStyle={{ background: "blue" }}
+              inkbarstyle={{ background: "blue" }}
               label="Questions"
               {...a11yProps(0)}
             />

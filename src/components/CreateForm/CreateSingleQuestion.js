@@ -172,7 +172,7 @@ export default function CreateSingleQuestion({
                     fullWidth
                     value={option}
                     onChange={(e) => handleOptions(i, e)}
-                    key={i}
+                    key={option}
                   />
                   <Button
                     color="secondary"
