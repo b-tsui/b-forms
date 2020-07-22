@@ -126,7 +126,7 @@ export default function CreateFormPage({
       setFormName(data.form.title);
       setFormDesc(data.form.description);
     }
-  }, [loading]);
+  }, [loading, data]);
   //for query loading
   if (loading) return null;
   if (error) return `Error! ${error}`;
