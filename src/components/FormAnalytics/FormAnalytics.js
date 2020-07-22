@@ -46,6 +46,7 @@ export default function FormAnalytics({ formId }) {
           ) {
             return <FormAnalyticsText question={question} />;
           }
+          return;
         })}
       </div>
     </>

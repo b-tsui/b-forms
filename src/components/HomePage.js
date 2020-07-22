@@ -13,7 +13,7 @@ const HomePage = () => {
     if (user && !isAuthenticated) {
       window.location.reload();
     }
-  }, [user]);
+  }, [user, isAuthenticated]);
 
   return (
     <>

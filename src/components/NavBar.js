@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -31,7 +31,10 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             <div>
               <a href="/" id="navbar-logo" style={{ color: "#f8f8ff" }}>
-                🅱️-forms
+                <span role="img" aria-label="B Emoji">
+                  🅱️
+                </span>
+                -forms
               </a>
             </div>
           </Typography>
