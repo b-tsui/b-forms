@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -66,7 +66,6 @@ const DialogActions = withStyles((theme) => ({
 
 export default function SingleFormShareDialog({ formId }) {
   const [open, setOpen] = React.useState(false);
-  const [copySuccess, setCopySuccess] = useState("");
   const linkRef = useRef(null);
 
   const copyToClipboard = (e) => {
@@ -75,7 +74,6 @@ export default function SingleFormShareDialog({ formId }) {
     // This is just personal preference.
     // I prefer to not show the the whole text area selected.
     e.target.focus();
-    setCopySuccess("Copied!");
   };
 
   const handleClickOpen = () => {
