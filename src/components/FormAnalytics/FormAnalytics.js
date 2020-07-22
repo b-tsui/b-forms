@@ -40,13 +40,8 @@ export default function FormAnalytics({ formId }) {
             question.questionType === "Checkbox"
           ) {
             return <FormAnalyticsMCrecharts question={question} />;
-          } else if (
-            question.questionType === "Text" ||
-            question.questionType === "Paragraph"
-          ) {
-            return <FormAnalyticsText question={question} />;
           }
-          return;
+          return <FormAnalyticsText question={question} />;
         })}
       </div>
     </>

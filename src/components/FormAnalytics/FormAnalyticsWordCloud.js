@@ -38,7 +38,7 @@ export default function FormAnalyticsWordCloud({ answers }) {
       setCloudWords(words);
     };
     handleCloudWords();
-  }, []);
+  }, [answers]);
   return (
     <ReactWordcloud
       callbacks={{

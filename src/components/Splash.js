@@ -49,7 +49,13 @@ const Splash = () => {
           style={{ height: "calc(90vh - 64px)" }}
           className="splash-title-container"
         >
-          <div className="splash-title-text">Create 🅱️etter Forms</div>
+          <div className="splash-title-text">
+            Create{" "}
+            <span role="img" aria-label="B Emoji">
+              🅱️
+            </span>
+            etter Forms
+          </div>
           <Button
             onClick={() => loginWithPopup({})}
             variant="contained"
