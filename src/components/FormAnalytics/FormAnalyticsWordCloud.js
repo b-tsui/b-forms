@@ -26,8 +26,11 @@ export default function FormAnalyticsWordCloud({ answers }) {
   //word processing all text to data formatted for wordcloud
   useEffect(() => {
     const handleCloudWords = () => {
-      let allWords = answers.join(" ");
-      let objWords = allWords.split(" ").reduce(function (acc, curr) {
+      let allWords = answers.join(" ").split(" ");
+
+      //Counts alls words in text and maps word to count.
+      //ex {word1: 5, word2: 3}
+      let objWords = allWords.reduce(function (acc, curr) {
         curr && (acc[curr] = acc[curr] + 1 || 1);
         return acc;
       }, {});
@@ -39,6 +42,7 @@ export default function FormAnalyticsWordCloud({ answers }) {
     };
     handleCloudWords();
   }, [answers]);
+
   return (
     <ReactWordcloud
       callbacks={{
