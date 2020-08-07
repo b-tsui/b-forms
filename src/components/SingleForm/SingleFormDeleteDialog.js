@@ -42,7 +42,17 @@ export default function SingleFormDeleteDialog({ formId, formTitle, refetch }) {
     setOpen(false);
   };
 
+  //id's of demo forms, if db gets reseeded need to update these
+  const demoForms = new Set([
+    "5ef8314e2e50ba192fd61ece",
+    "5ef8fa868e19332bb6172355",
+  ]);
   const handleDelete = async () => {
+    if (demoForms.has(formId)) {
+      alert("Error! You may not delete this demo form!");
+      setOpen(false);
+      return;
+    }
     await deleteForm({ variables: { input: { id: formId } } });
     refetch();
     setOpen(false);
