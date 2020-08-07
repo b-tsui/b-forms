@@ -86,9 +86,19 @@ export default function CreateSingleQuestion({
     setAllQuestions(qCopy);
   };
 
+  //id's of demo q's, if db gets reseeded need to update these
+  const demoQs = new Set([
+    "5ef8314e2e50ba192fd61ed0",
+    "5ef8fa888e19332bb6172356",
+    "5ef8fa9b8e19332bb6172357",
+  ]);
+
   const handleQuestionDelete = async (e) => {
     if (numQuestions < 2) {
       alert("Error! You must have at least 1 question!");
+      return;
+    } else if (demoQs.has(question.id)) {
+      alert("Error! You may not delete this demo question");
       return;
     }
     await deleteQuestion({ variables: { input: { id: question.id } } });
